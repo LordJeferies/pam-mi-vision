@@ -1,1 +1,18 @@
-{"name":"Pam — Mi visión","short_name":"Pam · Visión","description":"Meditación guiada, visualización y plan profesional para Pamela","start_url":"./","scope":"./","display":"standalone","background_color":"#10262b","theme_color":"#152a32","icons":[{"src":"assets/icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]}
+{
+  "name": "Pam · Mi visión — Meditación guiada",
+  "short_name": "Pam · Mi visión",
+  "description": "Una experiencia personal paso a paso para imaginar, reflexionar y avanzar.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#092329",
+  "theme_color": "#102b30",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
