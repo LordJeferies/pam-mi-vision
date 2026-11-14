@@ -1,18 +1,1 @@
-{
-  "name": "Pam · Mi visión — Meditación guiada",
-  "short_name": "Pam · Mi visión",
-  "description": "Una experiencia personal paso a paso para imaginar, reflexionar y avanzar.",
-  "start_url": "./",
-  "scope": "./",
-  "display": "standalone",
-  "background_color": "#092329",
-  "theme_color": "#102b30",
-  "icons": [
-    {
-      "src": "assets/icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
-    }
-  ]
-}
+{"id":"./","name":"Pam · Mi visión — V2 Alfa","short_name":"Mi visión","description":"Meditaciones guiadas, diario personal y dos caminos de desarrollo profesional.","start_url":"./","scope":"./","display":"standalone","background_color":"#10292e","theme_color":"#10292e","lang":"es","icons":[{"src":"./assets/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"./assets/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}

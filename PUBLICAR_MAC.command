@@ -1,30 +1,56 @@
 #!/bin/bash
 set -euo pipefail
+OWNER='LordJeferies'
+REPO='pam-mi-vision'
+ZIP_DEFAULT='Pam_Mi_Vision_V2_Alfa_GitHubPages.zip'
 ZIP="${1:-}"
-if [ -z "$ZIP" ]; then ZIP=$(find "$HOME/Downloads" -maxdepth 3 -type f -name 'Pamela_Mi_Vision_WIZARD_GitHubPages*.zip' -print -quit); fi
-if [ -z "$ZIP" ] || [ ! -f "$ZIP" ]; then echo 'ZIP no encontrado en Descargas'; exit 1; fi
-for t in gh git unzip rsync; do command -v "$t" >/dev/null || { echo "Falta $t"; exit 1; }; done
+if [ -z "$ZIP" ]; then
+  ZIP=$(find "$HOME/Downloads" -maxdepth 3 -type f -name "$ZIP_DEFAULT" -print -quit)
+fi
+if [ -z "$ZIP" ] || [ ! -f "$ZIP" ]; then echo '❌ No se encontró el ZIP en Descargas.'; exit 1; fi
+for TOOL in git gh unzip rsync; do
+  if ! command -v "$TOOL" >/dev/null 2>&1; then echo "❌ Falta instalar: $TOOL"; exit 1; fi
+done
 if ! gh auth status >/dev/null 2>&1; then gh auth login --web --git-protocol https; fi
-USER=$(gh api user --jq .login)
-if [ "$(echo "$USER" | tr '[:upper:]' '[:lower:]')" != lordjeferies ]; then echo "Cuenta equivocada: $USER"; exit 1; fi
-TMP=$(mktemp -d); trap 'rm -rf "$TMP"' EXIT
-mkdir "$TMP/source"; unzip -q "$ZIP" -d "$TMP/source"
-SRC=$(find "$TMP/source" -maxdepth 5 -type f -name manifest.webmanifest -print -quit)
-[ -n "$SRC" ] || { echo 'Manifiesto ausente'; exit 1; }; SRC=$(dirname "$SRC")
-for f in index.html sw.js assets/icon.svg; do [ -f "$SRC/$f" ] || { echo "Falta $f"; exit 1; }; done
-if gh repo view LordJeferies/pam-mi-vision >/dev/null 2>&1; then
- gh repo clone LordJeferies/pam-mi-vision "$TMP/repo"
+LOGIN=$(gh api user --jq '.login')
+if [ "$(echo "$LOGIN" | tr '[:upper:]' '[:lower:]')" != "$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')" ]; then
+  echo "❌ Conectado como $LOGIN, se necesita $OWNER"; exit 1
+fi
+unzip -t "$ZIP" >/dev/null
+TMP=$(mktemp -d)
+trap 'rm -rf "$TMP"' EXIT
+mkdir "$TMP/source"
+unzip -q "$ZIP" -d "$TMP/source"
+INDEX=$(find "$TMP/source" -maxdepth 4 -type f -name index.html -print -quit)
+if [ -z "$INDEX" ]; then echo '❌ El ZIP no contiene index.html'; exit 1; fi
+SRC=$(dirname "$INDEX")
+for F in app.js data.js styles.css sw.js manifest.webmanifest assets/icon-192.png assets/icon-512.png; do
+  if [ ! -f "$SRC/$F" ]; then echo "❌ Falta $F"; exit 1; fi
+done
+if gh repo view "$OWNER/$REPO" >/dev/null 2>&1; then
+  gh repo clone "$OWNER/$REPO" "$TMP/repo"
+  cd "$TMP/repo"
+  git checkout main
+  git pull --ff-only origin main
 else
- mkdir "$TMP/repo"; cd "$TMP/repo"; git init -b main; gh repo create LordJeferies/pam-mi-vision --public --source=. --remote=origin
+  mkdir "$TMP/repo"
+  cd "$TMP/repo"
+  git init -b main
+  gh repo create "$OWNER/$REPO" --public --source=. --remote=origin
 fi
-cd "$TMP/repo"
-git checkout main >/dev/null 2>&1 || true
-rsync -a --exclude='.git/' "$SRC/" "$TMP/repo/"
-git add index.html manifest.webmanifest sw.js README.md assets/icon.svg PUBLICAR_MAC.command
-if ! git diff --cached --quiet; then
- git -c user.name=LordJeferies -c user.email=LordJeferies@users.noreply.github.com commit -m 'Update Pam meditation with step-by-step wizard'
- git push -u origin main
+# Respaldar archivos previos del repositorio dentro de Descargas.
+BACKUP="$HOME/Downloads/pam-mi-vision-respaldo-repo-$(date +%Y%m%d-%H%M%S).tar.gz"
+tar -czf "$BACKUP" --exclude=.git -C "$TMP/repo" .
+echo "✅ Copia previa: $BACKUP"
+rsync -av --exclude='.git/' "$SRC/" "$TMP/repo/"
+git add -A
+if git diff --cached --quiet; then echo '✅ No hay cambios por publicar.'; else
+  git -c user.name="$OWNER" -c user.email="$OWNER@users.noreply.github.com" commit -m 'Release Pam Mi Vision V2 Alfa'
+  git push -u origin main
 fi
-if ! gh api repos/LordJeferies/pam-mi-vision/pages >/dev/null 2>&1; then gh api -X POST repos/LordJeferies/pam-mi-vision/pages -f 'source[branch]=main' -f 'source[path]=/' || true; fi
-echo 'Publicado: https://lordjeferies.github.io/pam-mi-vision/'
-open 'https://lordjeferies.github.io/pam-mi-vision/'
+if ! gh api "repos/$OWNER/$REPO/pages" >/dev/null 2>&1; then
+  gh api --method POST "repos/$OWNER/$REPO/pages" -f 'source[branch]=main' -f 'source[path]=/' || echo '⚠️ Revisa GitHub Pages en Settings → Pages.'
+fi
+URL="https://${OWNER}.github.io/${REPO}/"
+echo "✅ V2 Alfa enviada a $URL"
+open "$URL" || true
