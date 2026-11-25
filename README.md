@@ -5,8 +5,9 @@ PWA personal para iPhone y escritorio. **Iniciar** abre *Volver a mí* con músi
 ## Meditaciones
 
 - Seis sesiones y 27 capítulos. La frase actual se muestra siempre y cambia según las marcas de la narración.
+- **Repetir meditación** vuelve a abrir la misma sesión desde el principio al terminar.
 - Voz y música se reproducen en pistas MP3 separadas. **Silenciar voz** conserva la música y el avance del texto. La pausa detiene ambas pistas.
-- Narración pregrabada con la voz Dora de [Kokoro-82M](https://huggingface.co/hexgrad/Kokoro-82M), modelo Apache 2.0, con pronunciación latinoamericana, ritmo y pausas ajustados a los guiones.
+- Narración sintética pregrabada con la voz Lola de [Pocket TTS de Kyutai](https://huggingface.co/kyutai/pocket-tts-without-voice-cloning), modelo en español de 24 capas bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). A partir de esa generación se editaron el nivel, los silencios y las marcas del texto.
 - Referencias de los guiones: [atención plena](https://oxfordmindfulness.org/resources/mindfulness-a-practical-guide-to-finding-peace-in-a-frantic-world-by-mark-williams-and-danny-penman-2), [autocompasión](https://pubmed.ncbi.nlm.nih.gov/37362192/), [etiquetado emocional](https://pubmed.ncbi.nlm.nih.gov/17576282/), [diálogo interno con distancia](https://pubmed.ncbi.nlm.nih.gov/24467424/) y [planificación con contraste mental](https://doi.org/10.3389/fpsyg.2021.565202). Los estudios evalúan las prácticas en sus propios contextos. Los guiones de Pam no son una intervención clínica validada.
 
 ## Uso y datos

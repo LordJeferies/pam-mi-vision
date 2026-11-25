@@ -19,7 +19,7 @@ let session = null;
 let narrating = false;
 let speechToken = 0;
 const defaultProgram = D.programs[0];
-const trackVersion = 2;
+const trackVersion = 3;
 
 function stopSpeech() {
   speechToken++;
@@ -337,8 +337,8 @@ function openProgram(id, position = 0) {
   });
   updateTranscript(entry);
   updateVoiceButton(entry);
-  audio.src = `./assets/meditaciones/voz-${program.id}.mp3`;
-  music.src = `./assets/meditaciones/musica-${program.id}.mp3`;
+  audio.src = `./assets/meditaciones/${timeline.voice}`;
+  music.src = `./assets/meditaciones/${timeline.music}`;
   playSession(entry);
 }
 
@@ -346,7 +346,10 @@ function renderFinish(program) {
   $('#view').innerHTML = `<section class="meditation-home meditation-finish">
     ${atmosphere()}
     <h1>Gracias por darte este momento, Pam.</h1>
-    <button class="btn primary play-button" data-route="home">Volver al inicio</button>
+    <div class="meditation-controls">
+      <button id="replaySession" class="btn primary play-button" type="button">Repetir meditación</button>
+      <button class="quiet-button" data-route="home" type="button">Volver al inicio</button>
+    </div>
     <details class="session-transcript">
       <summary>Guardar una reflexión</summary>
       <p>${esc(program.question)}</p>
@@ -357,6 +360,7 @@ function renderFinish(program) {
   </section>`;
   setView('finish');
   bindGeneric();
+  $('#replaySession').onclick = () => openProgram(program.id);
   $('#saveReflection').onclick = () => {
     const content = $('#reflectionText').value.trim();
     if (!content) return toast('Escribe una reflexión para guardarla.');

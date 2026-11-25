@@ -3,94 +3,82 @@ window.PAM_DATA = {
     {
       "id": "prog-1",
       "code": "Programa 01",
-      "title": "Volver a mí",
-      "subtitle": "Hacer una pausa, reconocer cómo llegas y recordar lo que te ha sostenido.",
-      "duration": "15 min",
+      "title": "Habla de lo que has hecho",
+      "subtitle": "Reconoce lo que has logrado y ponlo en palabras para tu próxima conversación.",
+      "duration": "3 min",
       "preset": "warmSanctuary",
       "chapters": [
         {
-          "title": "1. Llegar al presente",
-          "seconds": 95,
-          "breath": "Nota un punto de apoyo.",
-          "text": "Hola, Pam. Tómate un momento para acomodarte. Puedes mirar un punto de la habitación o, si te apetece, cerrar los ojos. Siente dónde se apoyan tus pies, tu espalda o tus manos. Quédate un momento con ese contacto. Si tu cabeza se va a lo que sigue, puedes volver al peso de los pies o al sonido más cercano."
+          "title": "1. Tu historia te da la palabra",
+          "seconds": 25,
+          "text": "Pam, hay algo que puedes decir con toda tranquilidad. Sé hacer mi trabajo, y tengo una historia que lo demuestra. Has trabajado con personas de distintos países y has sabido entrar en conversaciones nuevas, entender lo que hacía falta y encontrar cómo aportar. Eso lo hiciste tú."
         },
         {
-          "title": "2. Encontrar tu ritmo",
-          "seconds": 100,
-          "breath": "Deja que el aire entre y salga a tu ritmo.",
-          "text": "Nota una respiración tal como llega. Si se siente cómodo, deja que el aire salga un poquito más despacio. Luego vuelve a respirar como siempre. Quizá llegaste con prisa, cansancio o ganas de hacer muchas cosas. Date unos segundos para notar cómo estás. Si una palabra te ayuda, puedes decirla por dentro. También puedes quedarte escuchando."
+          "title": "2. Lo que sabes hacer con clientes",
+          "seconds": 24,
+          "text": "En gestión de cuentas has escuchado a clientes, detectado lo que necesitaban y mantenido conversaciones que requerían seguimiento. Puedes decirlo en voz alta. Sé hacer preguntas que aclaran un problema. Sé orientar a un cliente y sostener el seguimiento hasta que el siguiente paso quede claro."
         },
         {
-          "title": "3. Recordar un comienzo",
-          "seconds": 110,
-          "breath": "Descansa en el punto de apoyo que elegiste.",
-          "text": "Recuerda un día en que algo era nuevo para ti. Quizá entraste a una reunión sin conocer a nadie, te tocó moverte en otro idioma o empezaste un trabajo con mucho por aprender. Elige una escena fácil de recordar. Fíjate en un detalle del lugar. Después, recuerda la primera cosa pequeña que hiciste para orientarte."
+          "title": "3. Lo que sabes hacer en otro idioma",
+          "seconds": 26,
+          "text": "Has trabajado con clientes y equipos en español y en inglés. Has aprendido a hacerte entender y a escuchar a personas con maneras distintas de trabajar. Tienes derecho a nombrar esa capacidad con todas sus letras. Puedo comunicarme en dos idiomas y adaptar mi mensaje a la persona que tengo enfrente."
         },
         {
-          "title": "4. Reconocer lo que hiciste",
-          "seconds": 120,
-          "breath": "Vuelve al sonido más cercano cuando lo necesites.",
-          "text": "Vuelve un instante a esa escena. Tal vez hiciste una pregunta, escuchaste con atención o buscaste a alguien que pudiera ayudarte. Completa por dentro una frase sencilla. En ese momento, yo hice esto. Dale espacio a tu respuesta. Un gesto que hoy parece cotidiano pudo haberte costado entonces."
+          "title": "4. Lo que sabes coordinar",
+          "seconds": 29,
+          "text": "Has coordinado tareas y entregas, y has participado en proyectos con personas de distintos contextos. En esos momentos alguien tenía que entender las prioridades y cuidar que el trabajo siguiera avanzando. Puedes decir, con sencillez y con orgullo. He coordinado proyectos. Sé poner orden, dar seguimiento y cuidar la manera en que el equipo se comunica."
         },
         {
-          "title": "5. Dar lugar a un logro",
-          "seconds": 110,
-          "breath": "Respira normalmente mientras recuerdas.",
-          "text": "Ahora trae a la memoria un momento en que algo salió adelante gracias a una decisión tuya. Puede ser una conversación que preparaste bien o una relación que cuidaste con seguimiento. Recuerda qué hiciste, paso a paso. Elige una palabra para nombrar la habilidad que usaste. Quizá fue paciencia, criterio, iniciativa o capacidad de escuchar."
+          "title": "5. Cuando la duda se hace sentir",
+          "seconds": 29,
+          "text": "A veces, justo antes de hablar, aparece esa idea de que todavía te falta algo. Suele aparecer cuando la oportunidad te importa. Y aquí está la historia completa. Ya has resuelto problemas, has trabajado en más de un contexto y tienes ejemplos propios. Puedes aprender cosas nuevas mientras hablas con firmeza de lo que ya sabes."
         },
         {
-          "title": "6. Hablarte con amabilidad",
-          "seconds": 100,
-          "breath": "Deja descansar las manos.",
-          "text": "Imagina el tono con el que le hablarías a alguien querido que acaba de tener un día difícil. Prueba usar ese tono contigo. Puedes decirte por dentro: esto me importa, y puedo tratarme con paciencia mientras lo aprendo. Date unos segundos. Si esa frase te queda lejos, quédate con algo más simple: puedo ir poco a poco."
+          "title": "6. Así suena cuando lo cuentas",
+          "seconds": 23,
+          "text": "Tengo experiencia en gestión de cuentas, coordinación de proyectos y comunicación en inglés y español. Me gusta entender qué necesita la gente y dar seguimiento para que las cosas avancen. Si quieres, puedo contarte un caso concreto y explicar cuál fue mi aporte."
         },
         {
-          "title": "7. Volver a tu día",
-          "seconds": 85,
-          "breath": "Nota el contacto con el lugar donde estás.",
-          "text": "Vuelve a sentir los pies. Escucha un sonido de la habitación. Si cerraste los ojos, ábrelos cuando te resulte cómodo. Puedes quedarte con este recuerdo, con una frase o simplemente con la pausa que acabas de darte. Tómate tu tiempo para volver a lo que sigue. Gracias por estar aquí, Pam."
+          "title": "7. Tu voz merece espacio",
+          "seconds": 30,
+          "text": "Pam, cuando te toque hablar de ti, tu experiencia merece ocupar un lugar en la conversación. Tómate el tiempo de terminar la frase y contar el ejemplo completo. Esto hice. Así trabajé. Esto aporté. Esa historia es tuya, y tienes toda la voz para contarla."
         }
       ],
-      "question": "¿Qué te gustaría recordar de ti después de esta pausa?",
-      "nextAction": "Si te sirve, quédate con la frase que más se pareció a lo que necesitabas escuchar hoy."
+      "question": "¿Qué ejemplo concreto de tu trabajo quieres llevar a tu próxima conversación?",
+      "nextAction": "Quédate con una frase propia y con un ejemplo que puedas contar."
     },
     {
       "id": "prog-2",
       "code": "Programa 02",
       "title": "Mi experiencia tiene valor",
       "subtitle": "Responder a la autocrítica con amabilidad y hechos de tu propia trayectoria.",
-      "duration": "13 min",
+      "duration": "2 min",
       "preset": "forestRain",
       "chapters": [
         {
-          "title": "1. Escuchar la duda",
-          "seconds": 100,
-          "breath": "Apoya los pies y nota el contacto.",
-          "text": "Pam, si hay una preocupación profesional dándote vueltas, deja que aparezca como una frase breve. Quizá sea: no sé si tengo la experiencia que buscan. Puedes reconocerla con otras palabras: estoy teniendo el pensamiento de que quizá me falte experiencia. Quédate un momento con esa frase. Vuelve al apoyo de los pies cuando quieras."
+          "title": "1. Lo aprendido se queda",
+          "seconds": 24,
+          "text": "Pam, has tenido que aprender la manera de moverte en lugares muy distintos. Hay mérito en cada vez que llegaste, observaste y empezaste a entender qué podía aportar tu trabajo. Lo aprendido se queda contigo, en cómo hablas con las personas y en cómo lees una conversación."
         },
         {
-          "title": "2. Tomar un poco de distancia",
-          "seconds": 110,
-          "breath": "Deja que la respiración siga a su ritmo.",
-          "text": "Prueba hablarte por dentro usando tu propio nombre, con el mismo tono que usarías con una amiga. Pam, ¿qué le dirías a alguien en tu lugar? Quizá le dirías que primero mire qué pide el puesto y qué ejemplos puede dar. Escucha la respuesta que te salga. Si te suena más natural en primera persona, puedes decirla así."
+          "title": "2. El trabajo que pocos ven",
+          "seconds": 24,
+          "text": "Hay una forma de trabajar que se nota en los detalles. En la llamada que preparaste, el seguimiento que hiciste y la persona a la que decidiste escuchar un poco más. Ahí se ve algo de ti. Te importa que la otra persona entienda y sepa qué ocurre después."
         },
         {
-          "title": "3. Recordar una escena concreta",
-          "seconds": 115,
-          "breath": "Nota cómo descansan tus manos.",
-          "text": "Elige una situación en la que un cliente o un equipo necesitaba algo que todavía no estaba claro. Recuerda qué viste, qué preguntaste y qué hiciste después. Quizá ordenaste un seguimiento, explicaste una decisión o ayudaste a dos personas a ponerse de acuerdo. Quédate con lo que recuerdes con claridad. Una escena sencilla basta."
+          "title": "3. La duda y tu historia",
+          "seconds": 25,
+          "text": "A veces la duda habla tan alto que toda tu historia parece quedar detrás. Es humano que pase, sobre todo cuando te importa lo que viene. Tu experiencia sigue siendo una historia hecha de días reales. Hay cosas que ya sabes hacer, aunque hoy te cueste recordarlas."
         },
         {
-          "title": "4. Ponerle nombre a una habilidad",
-          "seconds": 105,
-          "breath": "Deja un momento de silencio después de elegir.",
-          "text": "Mira qué habilidad se ve en esa escena. Si hiciste buenas preguntas, tal vez escuchaste con atención. Si explicaste un proceso a alguien con otro contexto, tal vez adaptaste tu comunicación. Completa la frase: en esa ocasión, yo aporté esto. Puedes usar las palabras que usarías al contárselo a alguien de confianza."
+          "title": "4. Una forma justa de describirte",
+          "seconds": 25,
+          "text": "Podrías hablar de ti con la precisión que usarías para describir a alguien que aprecias. Hay cosas en las que tiene experiencia y cosas que todavía está aprendiendo. Las dos pueden caber en una misma conversación. Y hay mucha dignidad en decir con sencillez lo que ya sabes hacer."
         },
         {
-          "title": "5. Llevarte una frase creíble",
-          "seconds": 90,
-          "breath": "Vuelve al contacto de los pies con el suelo.",
-          "text": "Prueba esta frase: tengo ejemplos concretos de lo que sé hacer y puedo aprender lo que me falte. Ajústala hasta que suene a ti. Luego imagina que alguien te pide un ejemplo en una conversación. Recuerda solo la primera frase con la que empezarías a contarlo. Puedes volver a ella cuando la necesites."
+          "title": "5. Lo que puedes llevar contigo",
+          "seconds": 20,
+          "text": "Hay una frase que me gustaría dejarte, Pam. Mi experiencia tiene detalles que merecen ser contados. Dicha en tu propia voz, con un ejemplo que tú conozcas, puede acompañarte a donde quieras presentarte."
         }
       ],
       "question": "¿Qué hiciste en la escena que recordaste y qué habilidad puso en juego?",
@@ -101,38 +89,33 @@ window.PAM_DATA = {
       "code": "Programa 03",
       "title": "Mi camino hacia la Fórmula 1",
       "subtitle": "Una visualización del paddock para explorar cómo quieres trabajar y ensayar un paso real.",
-      "duration": "18 min",
+      "duration": "2 min",
       "preset": "horizonCinema",
       "chapters": [
         {
-          "title": "1. Entrar en el paddock",
-          "seconds": 120,
-          "breath": "Mantén un punto de apoyo mientras imaginas.",
-          "text": "Imagina que llegas a un circuito por la mañana. Hay personal preparando el hospitality, gente revisando acreditaciones y conversaciones en varios idiomas. A lo lejos se oye actividad en el garaje. Puedes imaginarlo como una escena o simplemente seguir la historia con palabras. Dale unos segundos para que aparezca el detalle que más te llama."
+          "title": "1. Una mañana en el circuito",
+          "seconds": 27,
+          "text": "Pam, ya está amaneciendo en el circuito. Detrás del vidrio, alguien acomoda las acreditaciones. Se oye una radio y, un poco más lejos, gente que llega conversando en varios idiomas. Te imagino mirando todo eso con una curiosidad que ya conoces. La de los lugares donde te gustaría aprender de cerca."
         },
         {
-          "title": "2. Descubrir qué trabajo te atrae",
-          "seconds": 125,
-          "breath": "Respira a tu ritmo mientras observas la escena.",
-          "text": "Acércate a una parte del trabajo que te da curiosidad. Quizá sea recibir a invitados, coordinar a proveedores o resolver con calma una petición de un socio. Imagina la tarea en un día normal. Nota con quién hablarías, qué tendrías que averiguar y qué te gustaría aportar. Elige la parte que te interese de verdad."
+          "title": "2. La parte del paddock que te llama",
+          "seconds": 24,
+          "text": "En medio del movimiento hay un detalle que te atrae. Alguien recibe a un invitado con calma y le explica cómo llegar a su sitio. Otro equipo resuelve un cambio de último minuto. Hay algo de esas escenas que se parece a trabajos que ya has hecho con gente de distintos lugares."
         },
         {
-          "title": "3. Ensayar un momento de trabajo",
-          "seconds": 120,
-          "breath": "Vuelve al sonido de la habitación si lo prefieres.",
-          "text": "En tu escena, un invitado llega y su nombre no aparece en la lista. Imagina que le haces una pregunta clara, confirmas el dato con el equipo y le dices cuándo tendrás una respuesta. Escucha el tono que usarías. Deja unos segundos entre cada paso. Quizá reconozcas una forma de actuar que ya has usado en otro trabajo."
+          "title": "3. Tu manera de entrar en la escena",
+          "seconds": 27,
+          "text": "En esta escena, una invitada se acerca con una duda. Tu voz suena tranquila al preguntarle qué necesita. La escuchas, buscas a la persona adecuada y vuelves con una respuesta clara. Es una escena pequeña. También es una forma honesta de verte haciendo un trabajo que te interesa."
         },
         {
-          "title": "4. Traer una prueba del presente",
-          "seconds": 165,
-          "breath": "Quédate un momento con el recuerdo.",
-          "text": "Recuerda una ocasión real en la que atendiste a alguien, aclaraste un malentendido o coordinaste algo con personas de distintos contextos. ¿Qué hiciste tú que ayudó? Si alguien del equipo te preguntara por tu experiencia, ensaya una frase breve con ese ejemplo. Puedes empezar por la situación y luego contar tu aporte."
+          "title": "4. Las cualidades que llevarías",
+          "seconds": 21,
+          "text": "El circuito es nuevo en esta historia. Tu curiosidad y tu manera de tratar a la gente tienen años contigo. Habría mucho por aprender ahí. También habría mucho de ti que podría encontrar un sitio."
         },
         {
-          "title": "5. Volver con un paso posible",
-          "seconds": 100,
-          "breath": "Nota las manos o el peso de los pies.",
-          "text": "Deja que la escena del circuito se aleje y vuelve al lugar en el que estás. Si quieres acercarte un poco a ese tipo de trabajo, elige un paso que quepa en tu semana. Leer una vacante, identificar una habilidad transferible o practicar cómo contar un caso. Imagina cuándo te vendría bien hacerlo. Puedes decidirlo más tarde si hoy prefieres descansar."
+          "title": "5. Una dirección posible",
+          "seconds": 24,
+          "text": "La escena puede quedarse como una imagen a la que vuelvas cuando quieras recordar qué te atrae de ese mundo. Hoy ya tienes algo desde donde acercarte. Una experiencia que contar, un trabajo que explorar y una manera tuya de estar presente."
         }
       ],
       "question": "¿Qué parte del trabajo te atrajo y qué puedes explorar esta semana?",
@@ -143,32 +126,28 @@ window.PAM_DATA = {
       "code": "Programa 04",
       "title": "Mi visión, mis decisiones",
       "subtitle": "Elegir una meta, reconocer qué suele frenarte y preparar un plan concreto.",
-      "duration": "11 min",
+      "duration": "2 min",
       "preset": "clarityPulse",
       "chapters": [
         {
-          "title": "1. Elegir algo que te importe",
-          "seconds": 95,
-          "breath": "Deja pasar una respiración antes de elegir.",
-          "text": "Piensa en algo profesional que te gustaría mover durante los próximos siete días. Puede estar ligado a Fórmula 1 o a un trabajo internacional que te acerque al tipo de entorno que quieres. Elige una meta que dependa en buena medida de ti. Completa por dentro: esta semana me gustaría hacer esto. Quédate con una sola."
+          "title": "1. Lo que te importa de verdad",
+          "seconds": 25,
+          "text": "Pam, quizá te atraiga la Fórmula Uno por la mezcla de idiomas, equipos y decisiones que pasan rápido. Quizá lo que buscas es sentir que tu trabajo te abre el mundo. Esa parte de ti merece ser escuchada. Le da dirección a muchas cosas que ya sabes hacer."
         },
         {
-          "title": "2. Imaginar qué cambiaría",
-          "seconds": 105,
-          "breath": "Mantén la respiración cómoda.",
-          "text": "Imagina que ya has dado ese paso. Si leíste una vacante, quizá ahora sabes qué experiencia destacar. Si escribiste a alguien, quizá terminaste un mensaje que llevabas días postergando. Nota qué sería valioso en ese resultado para ti. Elige un detalle concreto y deja que la imagen se vaya."
+          "title": "2. Una meta a escala humana",
+          "seconds": 26,
+          "text": "El futuro puede parecer enorme cuando intentas verlo de una sola vez. Los días reales caben en algo más pequeño. Una conversación. Una vacante que te da curiosidad. Una línea de tu historia que por fin cuenta bien lo que hiciste. Cualquiera de esas cosas puede ser un comienzo digno."
         },
         {
-          "title": "3. Ver el obstáculo",
-          "seconds": 100,
-          "breath": "Si te distraes, regresa al punto de apoyo.",
-          "text": "Piensa qué suele aparecer justo antes de que pospongas ese paso. Tal vez te pones a revisar el CV entero, intentas encontrar la frase perfecta o abres varias vacantes y pierdes el hilo. Elige un obstáculo que puedas reconocer en el momento. Puedes mirarlo con curiosidad, como mirarías una costumbre que estás aprendiendo a cambiar."
+          "title": "3. Cuando aparezca la exigencia",
+          "seconds": 22,
+          "text": "Es probable que, justo cuando algo te importa, se te antoje dejarlo impecable antes de dar el paso. Es una manera comprensible de querer cuidarlo. También puedes cuidarlo eligiendo una pieza pequeña y dándole el tiempo que tienes disponible hoy."
         },
         {
-          "title": "4. Preparar una respuesta",
-          "seconds": 95,
-          "breath": "Deja unos segundos para formular tu plan.",
-          "text": "Completa por dentro: si aparece este obstáculo, entonces haré esta acción. Por ejemplo: si empiezo a retocar todo el CV, entonces dedicaré diez minutos a adaptar solo el primer párrafo. Haz que la acción sea clara y pequeña. Imagina el momento en que aparece la señal y lo primero que harías. Cuando quieras, vuelve al lugar donde estás."
+          "title": "4. Un acuerdo contigo",
+          "seconds": 26,
+          "text": "Hay una forma sencilla de dejarte el camino preparado. Si el currículum entero empieza a pedirme atención, voy a dedicarle diez minutos al párrafo que mejor cuenta mi experiencia. Es un acuerdo entre tú y tu tiempo. Algo a lo que puedes regresar con calma."
         }
       ],
       "question": "¿Qué situación te servirá de señal y qué harás cuando aparezca?",
@@ -179,26 +158,23 @@ window.PAM_DATA = {
       "code": "Programa 05",
       "title": "Antes de una entrevista",
       "subtitle": "Llegar a la conversación con un punto de apoyo y un ejemplo listo para contar.",
-      "duration": "5 min",
+      "duration": "1 min",
       "preset": "warmSanctuary",
       "chapters": [
         {
-          "title": "1. Acomodarte antes de entrar",
-          "seconds": 95,
-          "breath": "Apoya los pies y suelta el aire con suavidad, si te resulta cómodo.",
-          "text": "Hola, Pam. Si tienes los ojos abiertos, puedes dejarlos así. Siente los pies en el suelo y deja descansar las manos. Si notas nervios, puedes nombrarlos por dentro: estoy nerviosa porque esta conversación me importa. Dale unos segundos a esa sensación. Respira a tu ritmo mientras miras un punto del lugar donde estás."
+          "title": "1. Estar aquí ya cuenta",
+          "seconds": 24,
+          "text": "Pam, esta conversación te importa y puede que el cuerpo se haya dado cuenta antes que tú. Estar un poco nerviosa es una manera humana de llegar. Ya estás aquí. Puedes empezar con el tono que usas cuando quieres entender a alguien de verdad."
         },
         {
-          "title": "2. Elegir un ejemplo que conozcas",
-          "seconds": 110,
-          "breath": "Deja una respiración entre cada parte del recuerdo.",
-          "text": "Recuerda un caso que conozcas bien. Puede ser un cliente que necesitaba orientación o una situación que pedía seguimiento. Empieza por lo que estaba pasando. Di por dentro qué hiciste tú. Termina con lo que cambió o aprendiste. Si no recuerdas una cifra, puedes explicar el resultado con las palabras que tengas a mano."
+          "title": "2. Tu historia tiene ejemplos",
+          "seconds": 24,
+          "text": "En tu vida ha habido personas a las que orientaste, conversaciones que retomaste a tiempo y problemas que ayudaste a ordenar. Si te preguntan por tu experiencia, puedes llevar un pedacito de esa historia a la mesa. Lo que ocurrió, lo que hiciste tú y lo que quedó después."
         },
         {
-          "title": "3. Ensayar cómo empiezas",
-          "seconds": 95,
-          "breath": "Vuelve al apoyo de los pies cuando quieras.",
-          "text": "Imagina que escuchas la primera pregunta. Date un instante antes de responder. Si es amplia, puedes empezar con estas palabras: un ejemplo que ilustra mi experiencia es… Y después cuentas el caso con tu propia voz. Si necesitas que aclaren una pregunta, puedes pedirlo con tranquilidad. Cuando estés lista, vuelve a lo que tienes delante."
+          "title": "3. Tu propia voz",
+          "seconds": 25,
+          "text": "Te puedes dar un instante para encontrar la primera frase. Con las palabras de todos los días, esas con las que cuentas bien una historia que sí viviste. Hay una persona entera detrás de tu currículum, Pam. Esa persona también va a estar en la conversación."
         }
       ],
       "question": "¿Con qué ejemplo te gustaría empezar si te preguntan por tu experiencia?",
@@ -209,26 +185,23 @@ window.PAM_DATA = {
       "code": "Programa 06",
       "title": "Después de un rechazo",
       "subtitle": "Dar espacio a lo que sientes, poner el resultado en perspectiva y elegir qué necesitas hoy.",
-      "duration": "9 min",
+      "duration": "1 min",
       "preset": "forestRain",
       "chapters": [
         {
-          "title": "1. Dar espacio a lo que sientes",
-          "seconds": 115,
-          "breath": "Vuelve a los pies o a un sonido si lo necesitas.",
-          "text": "Pam, si una respuesta te dolió o te dejó cansada, puedes reconocerlo a tu manera. Quizá sientas decepción, rabia, alivio o varias cosas juntas. Elige una palabra si te sirve. Si prefieres dejar de pensar en el mensaje, mira un objeto cercano y nota su color o su forma. Puedes volver a él en cualquier momento."
+          "title": "1. Lo que te importaba",
+          "seconds": 22,
+          "text": "Pam, recibir una respuesta que no querías puede doler. El hueco que deja el silencio también cuenta. Habías puesto algo tuyo ahí, y tiene sentido que hoy lo sientas. Este rato puede ser solo para acompañarte."
         },
         {
-          "title": "2. Mirar el resultado con perspectiva",
-          "seconds": 120,
-          "breath": "Mantén los ojos abiertos si te resulta más cómodo.",
-          "text": "Recuerda lo que sabes con certeza sobre este proceso. Quizá recibiste una respuesta breve o sigues esperando. Ahora recuerda algo que también sabes de ti por experiencia propia. Tal vez preparaste bien una respuesta o te animaste a enviar la candidatura. Puedes dejar ambas cosas donde están y hablarte como le hablarías a una amiga que acaba de pasar por lo mismo."
+          "title": "2. Tu historia sigue siendo tuya",
+          "seconds": 25,
+          "text": "Hoy llegó una respuesta sobre un proceso. También sigue aquí la persona que reunió el valor de presentarse, preparó lo que pudo y se permitió ilusionarse. Esa parte de la historia te pertenece. Puedes mirarla con la misma ternura con la que mirarías a alguien querido en tu lugar."
         },
         {
-          "title": "3. Elegir cómo cerrar el día",
-          "seconds": 105,
-          "breath": "Nota una última vez el contacto con el suelo.",
-          "text": "Pregúntate qué te haría bien en la próxima hora. Quizá descansar, salir a caminar o hablar con alguien. Si más adelante quieres revisar la candidatura, puedes elegir un solo detalle para ajustar. Si hoy necesitas cerrar el correo y seguir con tu día, también puedes hacerlo. Tómate un momento antes de levantarte."
+          "title": "3. El resto puede esperar",
+          "seconds": 26,
+          "text": "Quizá mañana te apetezca mirar qué aprendiste. Quizá te venga bien más tiempo. Hoy hay sitio para descansar, conversar con alguien o dejar que baje un poco el ruido. Gracias por escucharte hasta aquí, Pam. Que el resto del día sea gentil contigo."
         }
       ],
       "question": "¿Qué necesitas ahora mismo, descanso o un paso pequeño que puedas decidir después?",
