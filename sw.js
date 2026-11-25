@@ -1,4 +1,4 @@
-const CACHE = 'pam-vision-meditaciones-v3';
+const CACHE = 'pam-vision-meditaciones-v4';
 const CORE = [
   './', './index.html', './styles.css', './data.js', './meditation-audio.js',
   './app.js', './manifest.webmanifest', './assets/icon.svg',

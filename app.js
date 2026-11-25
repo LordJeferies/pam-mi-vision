@@ -1,7 +1,7 @@
 /* Pam · Mi visión */
 (()=>{'use strict';
 const D=window.PAM_DATA, AUDIO=window.PAM_AUDIO, KEY='pam_mi_vision_v2_alfa';
-const defaultState={theme:'light',paletteVersion:3,font:1,route:'home',lastProgram:'prog-1',lastChapter:0,completed:[],sessions:[],journal:[],evidences:D.evidences.map(x=>({...x})),applications:[],firstWeek:D.firstWeekPlan.map(x=>({...x})),vision:'Vivo mi presente con dignidad y dirección. Puedo postularme a Fórmula 1 desde hoy y seguir creciendo mediante oportunidades profesionales compatibles con mi experiencia.',woop:{wish:'Trabajar en Fórmula 1 en comunicación, alianzas, eventos o gestión comercial.',outcome:'Aportar mi experiencia a un equipo internacional y desarrollar nuevas capacidades.',obstacle:'Esperar a sentir que mi CV es perfecto.',plan:'Si aparece esa duda, dedicaré quince minutos a preparar o enviar una candidatura.'},mood:[],meditationResume:null};
+const defaultState={theme:'light',paletteVersion:3,font:1,route:'home',lastProgram:'prog-1',lastChapter:0,completed:[],sessions:[],journal:[],evidences:D.evidences.map(x=>({...x})),applications:[],firstWeek:D.firstWeekPlan.map(x=>({...x})),vision:'Vivo mi presente con dignidad y dirección. Puedo postularme a Fórmula 1 desde hoy y seguir creciendo mediante oportunidades profesionales compatibles con mi experiencia.',woop:{wish:'Trabajar en Fórmula 1 en comunicación, alianzas, eventos o gestión comercial.',outcome:'Aportar mi experiencia a un equipo internacional y desarrollar nuevas capacidades.',obstacle:'Esperar a sentir que mi CV es perfecto.',plan:'Si aparece esa duda, dedicaré quince minutos a preparar o enviar una candidatura.'},mood:[],meditationResume:null,voiceMuted:false};
 const clone=x=>JSON.parse(JSON.stringify(x));let state=clone(defaultState);let migrateChapter=false;try{const old=JSON.parse(localStorage.getItem(KEY)||'null');if(old&&typeof old==='object'){migrateChapter=old.paletteVersion!==3;state={...state,...old,theme:migrateChapter?'light':old.theme,woop:{...state.woop,...old.woop}};}else{const legacy=JSON.parse(localStorage.getItem('pam_mi_vision_calm_v3')||'null');if(legacy){migrateChapter=true;state.journal=legacy.journalEntries||[];state.evidences=legacy.evidences||[];state.applications=legacy.applications||[];state.firstWeek=legacy.firstWeek||state.firstWeek;state.vision=legacy.visionStatement||state.vision;state.completed=legacy.completedPrograms||[];state.lastProgram=legacy.lastSession?.programId||'prog-1';state.lastChapter=legacy.lastSession?.chapterIdx||0;state.woop={wish:legacy.woopWish||state.woop.wish,outcome:state.woop.outcome,obstacle:legacy.woopObstacle||state.woop.obstacle,plan:`Si ${legacy.woopIf||'surge la duda'}, entonces ${legacy.woopThen||'haré una acción concreta'}.`};}}}catch(e){console.warn('No se pudo recuperar almacenamiento',e)}
 if (migrateChapter && !state.meditationResume && state.lastChapter > 0 && !state.completed.includes(state.lastProgram)) {
   const resumeAt = AUDIO[state.lastProgram]?.chapters?.[state.lastChapter];
@@ -19,6 +19,7 @@ let session = null;
 let narrating = false;
 let speechToken = 0;
 const defaultProgram = D.programs[0];
+const trackVersion = 2;
 
 function stopSpeech() {
   speechToken++;
@@ -80,8 +81,11 @@ function nav(route) {
 function resumePoint() {
   const point = state.meditationResume;
   const timeline = point && Object.hasOwn(AUDIO, point.id) ? AUDIO[point.id] : null;
-  return timeline && Number.isFinite(point.seconds) &&
-    point.seconds > 0 && point.seconds < timeline.duration - 1 ? point : null;
+  if (!timeline || !Number.isFinite(point.seconds) || point.seconds <= 0) return null;
+  // The new recording has a different pace. Older checkpoints resume at the matching chapter.
+  const seconds = point.trackVersion === trackVersion ? point.seconds :
+    (timeline.chapters[state.lastChapter] ?? 0);
+  return seconds < timeline.duration - 1 ? {id: point.id, seconds} : null;
 }
 
 function durationLabel(program) {
@@ -141,20 +145,22 @@ function savePosition(entry, force = false) {
       (entry.audio.ended && !force)) return;
   if (!force && Math.abs(position - entry.savedAt) < 5) return;
   entry.savedAt = position;
-  state.meditationResume = {id: entry.program.id, seconds: position};
+  state.meditationResume = {id: entry.program.id, seconds: position, trackVersion};
   state.lastProgram = entry.program.id;
   state.lastChapter = entry.chapter;
   save();
 }
 
-function closeSession() {
+function closeSession(keepPosition = true) {
   if (!session) return;
   const entry = session;
   session = null;
-  savePosition(entry, true);
-  entry.audio.pause();
-  entry.audio.removeAttribute('src');
-  entry.audio.load();
+  if (keepPosition) savePosition(entry, true);
+  for (const track of [entry.audio, entry.music]) {
+    track.pause();
+    track.removeAttribute('src');
+    track.load();
+  }
 }
 
 function refreshPlayback(entry, status = '') {
@@ -172,13 +178,32 @@ function refreshPlayback(entry, status = '') {
 }
 
 function updateTranscript(entry) {
-  const reached = entry.timeline.chapters.filter(time => time <= entry.audio.currentTime).length;
-  const index = Math.max(0, reached - 1);
-  if (index === entry.chapter) return;
-  entry.chapter = index;
-  const chapter = entry.program.chapters[index];
-  $('#chapterTitle').textContent = chapter.title.replace(/^\d+\.\s*/, '');
-  $('#chapterText').textContent = chapter.text;
+  const now = entry.positionReady ? entry.audio.currentTime : entry.seekTo;
+  const chapterIndex = Math.max(0, entry.timeline.chapters.filter(time => time <= now).length - 1);
+  const phrases = entry.timeline.phrases[chapterIndex];
+  const phraseIndex = Math.max(0, phrases.filter(phrase => phrase.at <= now).length - 1);
+  if (chapterIndex === entry.chapter && phraseIndex === entry.phrase) return;
+  entry.chapter = chapterIndex;
+  entry.phrase = phraseIndex;
+  $('#chapterTitle').textContent = entry.program.chapters[chapterIndex].title.replace(/^\d+\.\s*/, '');
+  $('#phraseText').textContent = phrases[phraseIndex].text;
+}
+
+function syncMusic(entry) {
+  const {audio, music} = entry;
+  if (!entry.positionReady || !music.readyState) return;
+  const target = Math.min(audio.currentTime, music.duration);
+  if (Math.abs(music.currentTime - target) > .35) music.currentTime = target;
+}
+
+function playMusic(entry) {
+  if (!entry.music.paused || entry.musicStarting) return;
+  entry.musicStarting = true;
+  entry.music.play().catch(error => {
+    if (session === entry && error.name !== 'AbortError') toast('La música no está disponible.');
+  }).finally(() => {
+    entry.musicStarting = false;
+  });
 }
 
 function playSession(entry) {
@@ -187,11 +212,22 @@ function playSession(entry) {
     entry.positionReady = entry.seekTo === 0;
     entry.audio.load();
   }
+  if (entry.music.error) entry.music.load();
   refreshPlayback(entry, 'Preparando audio…');
   entry.audio.play().catch(error => {
     if (session !== entry || error.name === 'AbortError') return;
+    entry.music.pause();
     refreshPlayback(entry, 'No se pudo reproducir. Puedes volver a intentarlo.');
   });
+  syncMusic(entry);
+  playMusic(entry);
+}
+
+function updateVoiceButton(entry) {
+  const muted = entry.audio.muted;
+  const button = $('#toggleVoice');
+  button.setAttribute('aria-pressed', String(muted));
+  button.textContent = muted ? 'Activar voz' : 'Silenciar voz';
 }
 
 function openProgram(id, position = 0) {
@@ -200,33 +236,53 @@ function openProgram(id, position = 0) {
   closeSession();
   stopSpeech();
   const audio = new Audio();
-  audio.preload = 'auto';
+  const music = new Audio();
+  audio.preload = music.preload = 'auto';
+  audio.muted = state.voiceMuted === true;
   const timeline = AUDIO[id];
   const seekTo = Math.min(Math.max(position, 0), timeline.duration - 1);
-  const entry = {audio, program, timeline, chapter: -1, seekTo, positionReady: seekTo === 0, savedAt: seekTo};
+  const entry = {
+    audio, music, program, timeline, chapter: -1, phrase: -1, seekTo,
+    positionReady: seekTo === 0, savedAt: seekTo, musicStarting: false
+  };
   session = entry;
   $('#view').innerHTML = `<section class="meditation-player">
     <div class="player-bar"><button id="exitPlayer" class="quiet-button">Salir</button></div>
     ${atmosphere()}
     <h1>${esc(program.title)}</h1>
+    <section class="live-transcript" aria-label="Texto de la meditación">
+      <h2 id="chapterTitle"></h2>
+      <p id="phraseText"></p>
+    </section>
     <div class="session-progress">
       <progress id="playerProgress" aria-label="Progreso de la sesión" max="${timeline.duration}" value="0"></progress>
       <div class="progress-times"><span id="elapsed">0:00</span><span>${timeLabel(timeline.duration)}</span></div>
     </div>
-    <button id="togglePlayback" class="btn primary play-button">Pausar</button>
+    <div class="meditation-controls">
+      <button id="togglePlayback" class="btn primary play-button">Pausar</button>
+      <button id="toggleVoice" class="btn soft voice-button" type="button">Silenciar voz</button>
+    </div>
     <p id="playerStatus" class="player-status" role="status"></p>
-    <details class="session-transcript">
-      <summary>Leer la meditación</summary>
-      <h2 id="chapterTitle"></h2><p id="chapterText"></p>
-      <details class="full-transcript">
-        <summary>Ver el texto completo</summary>
-        ${program.chapters.map(chapter => `<h2>${esc(chapter.title)}</h2><p>${esc(chapter.text)}</p>`).join('')}
-      </details>
+    <details class="session-transcript full-transcript">
+      <summary>Ver el texto completo</summary>
+      ${program.chapters.map(chapter => `<h2>${esc(chapter.title)}</h2><p>${esc(chapter.text)}</p>`).join('')}
     </details>
   </section>`;
   setView('player');
   $('#exitPlayer').onclick = () => nav(current === 'meditate' ? 'meditate' : 'home');
-  $('#togglePlayback').onclick = () => audio.paused ? playSession(entry) : audio.pause();
+  $('#togglePlayback').onclick = () => {
+    if (audio.paused) playSession(entry);
+    else {
+      audio.pause();
+      music.pause();
+    }
+  };
+  $('#toggleVoice').onclick = () => {
+    audio.muted = !audio.muted;
+    state.voiceMuted = audio.muted;
+    save();
+    updateVoiceButton(entry);
+  };
   audio.addEventListener('loadedmetadata', () => {
     if (session !== entry) return;
     if (!entry.positionReady) {
@@ -234,26 +290,45 @@ function openProgram(id, position = 0) {
       entry.positionReady = true;
     }
     updateTranscript(entry);
+    syncMusic(entry);
     refreshPlayback(entry, audio.paused ? '' : 'Preparando audio…');
   });
-  audio.addEventListener('playing', () => refreshPlayback(entry));
-  audio.addEventListener('waiting', () => refreshPlayback(entry, 'Preparando audio…'));
+  music.addEventListener('loadedmetadata', () => {
+    if (session === entry) syncMusic(entry);
+  });
+  audio.addEventListener('playing', () => {
+    if (session !== entry) return;
+    syncMusic(entry);
+    playMusic(entry);
+    refreshPlayback(entry);
+  });
+  audio.addEventListener('waiting', () => {
+    if (session !== entry) return;
+    if (audio.currentTime > 0) music.pause();
+    refreshPlayback(entry, 'Preparando audio…');
+  });
   audio.addEventListener('pause', () => {
     if (session !== entry || audio.ended) return;
+    music.pause();
     savePosition(entry, true);
     refreshPlayback(entry);
   });
   audio.addEventListener('timeupdate', () => {
     if (session !== entry) return;
     updateTranscript(entry);
+    if (!audio.paused && !music.paused) syncMusic(entry);
     $('#playerProgress').value = audio.currentTime;
     $('#elapsed').textContent = timeLabel(audio.currentTime);
     savePosition(entry);
   });
-  audio.addEventListener('error', () => refreshPlayback(entry, 'Audio no disponible. Revisa tu conexión o abre la lectura.'));
+  audio.addEventListener('error', () => {
+    if (session !== entry) return;
+    music.pause();
+    refreshPlayback(entry, 'Audio no disponible. Revisa tu conexión o abre el texto completo.');
+  });
   audio.addEventListener('ended', () => {
     if (session !== entry) return;
-    session = null;
+    closeSession(false);
     state.meditationResume = null;
     if (!state.completed.includes(program.id)) state.completed.push(program.id);
     state.sessions.unshift({id: uid(), date: today(), program: program.title});
@@ -261,7 +336,9 @@ function openProgram(id, position = 0) {
     renderFinish(program);
   });
   updateTranscript(entry);
-  audio.src = `./assets/meditaciones/${program.id}.mp3`;
+  updateVoiceButton(entry);
+  audio.src = `./assets/meditaciones/voz-${program.id}.mp3`;
+  music.src = `./assets/meditaciones/musica-${program.id}.mp3`;
   playSession(entry);
 }
 

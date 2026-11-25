@@ -133,3 +133,46 @@ summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; b
   .meditation-atmosphere { width: 128px; margin-block: 0; }
   .meditation-home, .meditation-player { gap: 9px; }
 }
+
+.meditation-player .meditation-atmosphere {
+  width: clamp(88px, 27vw, 133px);
+  margin: 2px 0 8px;
+}
+.live-transcript {
+  width: min(100%, 530px);
+  min-height: 12rem;
+  padding: 14px clamp(10px, 3vw, 28px) 8px;
+  display: grid;
+  align-content: center;
+  gap: 10px;
+}
+.live-transcript h2 {
+  font: inherit;
+  font-size: .81rem;
+  font-weight: 650;
+  color: var(--muted);
+}
+.live-transcript p {
+  margin: 0;
+  line-height: 1.48;
+  font-size: clamp(1.12rem, 4.9vw, 1.54rem);
+  text-wrap: pretty;
+}
+.meditation-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+}
+.meditation-controls .play-button { min-width: 140px; }
+.meditation-controls .voice-button { min-height: 56px; }
+.meditation-controls .voice-button[aria-pressed="true"] {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+.meditation-player .full-transcript[open] { text-align: left; }
+@media (max-height: 680px) {
+  .meditation-player { gap: 8px; }
+  .meditation-player .meditation-atmosphere { width: 76px; }
+}
