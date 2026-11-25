@@ -4,235 +4,235 @@ window.PAM_DATA = {
       "id": "prog-1",
       "code": "Programa 01",
       "title": "Volver a mí",
-      "subtitle": "Reconectar con tu identidad personal y tus más de once años de historia real",
+      "subtitle": "Hacer una pausa, reconocer cómo llegas y recordar lo que te ha sostenido.",
       "duration": "15 min",
       "preset": "warmSanctuary",
       "chapters": [
         {
           "title": "1. Llegar al presente",
           "seconds": 95,
-          "breath": "Inhala en 4 segundos... pausa... exhala suavemente en 6 segundos.",
-          "text": "Bienvenida a tu refugio personal, Pamela. Durante los próximos minutos no tienes que demostrarle nada a nadie. Deja que tus hombros bajen lejos de las orejas. Nota el peso de tu cuerpo y el silencio que empieza a abrirse dentro de ti. Estás a salvo aquí, en tu propio centro."
+          "breath": "Nota un punto de apoyo.",
+          "text": "Hola, Pam. Tómate un momento para acomodarte. Puedes mirar un punto de la habitación o, si te apetece, cerrar los ojos. Siente dónde se apoyan tus pies, tu espalda o tus manos. Quédate un momento con ese contacto. Si tu cabeza se va a lo que sigue, puedes volver al peso de los pies o al sonido más cercano."
         },
         {
-          "title": "2. Respirar y reconocer el cuerpo",
+          "title": "2. Encontrar tu ritmo",
           "seconds": 100,
-          "breath": "Siente el aire fresco al entrar y cálido al salir.",
-          "text": "Lleva una mano suave hacia tu pecho o simplemente siente su movimiento al respirar. Este cuerpo y esta voz te han sostenido durante más de once años de vida profesional. Han respondido llamadas en inglés y español, han tranquilizado equipos y han resuelto momentos complejos. Agradécele hoy a tu cuerpo por su lealtad."
+          "breath": "Deja que el aire entre y salga a tu ritmo.",
+          "text": "Nota una respiración tal como llega. Si se siente cómodo, deja que el aire salga un poquito más despacio. Luego vuelve a respirar como siempre. Quizá llegaste con prisa, cansancio o ganas de hacer muchas cosas. Date unos segundos para notar cómo estás. Si una palabra te ayuda, puedes decirla por dentro. También puedes quedarte escuchando."
         },
         {
-          "title": "3. La Pamela que comenzó",
+          "title": "3. Recordar un comienzo",
           "seconds": 110,
-          "breath": "Respira con ternura hacia tu propia historia.",
-          "text": "Recuerda por un instante a la Pamela que daba sus primeros pasos profesionales hace más de una década. Piensa en tus etapas en Argentina, en las experiencias vinculadas a Trayken y Multimax. No tenías todas las respuestas, pero tenías carácter, curiosidad y ganas de aprender. Mírala hoy con orgullo: ella abrió el camino que hoy caminas."
+          "breath": "Descansa en el punto de apoyo que elegiste.",
+          "text": "Recuerda un día en que algo era nuevo para ti. Quizá entraste a una reunión sin conocer a nadie, te tocó moverte en otro idioma o empezaste un trabajo con mucho por aprender. Elige una escena fácil de recordar. Fíjate en un detalle del lugar. Después, recuerda la primera cosa pequeña que hiciste para orientarte."
         },
         {
-          "title": "4. Las experiencias que te formaron",
+          "title": "4. Reconocer lo que hiciste",
           "seconds": 120,
-          "breath": "Inhala amplitud... exhala cualquier tensión.",
-          "text": "Tu trayectoria cruzó fronteras e industrias. Aprendiste a gestionar relaciones comerciales en Hesta, trabajaste con estándares de Estados Unidos en BC Sales, participaste en proyectos vinculados a InEnergy en Dubái, colaboraste internacionalmente con Joc López y sumaste experiencia comercial reciente en SoftSvit. Cada etapa dejó en ti una versatilidad real que nadie puede quitarte."
+          "breath": "Vuelve al sonido más cercano cuando lo necesites.",
+          "text": "Vuelve un instante a esa escena. Tal vez hiciste una pregunta, escuchaste con atención o buscaste a alguien que pudiera ayudarte. Completa por dentro una frase sencilla. En ese momento, yo hice esto. Dale espacio a tu respuesta. Un gesto que hoy parece cotidiano pudo haberte costado entonces."
         },
         {
-          "title": "5. Los logros que a veces minimizas",
+          "title": "5. Dar lugar a un logro",
           "seconds": 110,
-          "breath": "Deja que el pecho se expanda con dignidad.",
-          "text": "Como eres una mujer resolutiva, muchas veces pasas de una meta a la siguiente sin detenerte a reconocer lo que lograste. Coordinar equipos de hasta quince personas, cuidar cuentas clave, organizar proyectos y comunicarte en dos idiomas no es casualidad: es oficio, liderazgo y talento comprobado."
+          "breath": "Respira normalmente mientras recuerdas.",
+          "text": "Ahora trae a la memoria un momento en que algo salió adelante gracias a una decisión tuya. Puede ser una conversación que preparaste bien o una relación que cuidaste con seguimiento. Recuerda qué hiciste, paso a paso. Elige una palabra para nombrar la habilidad que usaste. Quizá fue paciencia, criterio, iniciativa o capacidad de escuchar."
         },
         {
-          "title": "6. Reconocer tu valor sin exigirte perfección",
+          "title": "6. Hablarte con amabilidad",
           "seconds": 100,
-          "breath": "Suaviza la mirada interior.",
-          "text": "No necesitas ser infalible ni saberlo todo para merecer grandes oportunidades. Tu valor profesional ya existe hoy, antes de cualquier respuesta externa. Te tratas con respeto, paciencia y justicia."
+          "breath": "Deja descansar las manos.",
+          "text": "Imagina el tono con el que le hablarías a alguien querido que acaba de tener un día difícil. Prueba usar ese tono contigo. Puedes decirte por dentro: esto me importa, y puedo tratarme con paciencia mientras lo aprendo. Date unos segundos. Si esa frase te queda lejos, quédate con algo más simple: puedo ir poco a poco."
         },
         {
-          "title": "7. Cierre reflexivo",
+          "title": "7. Volver a tu día",
           "seconds": 85,
-          "breath": "Toma una inhalación profunda y luminosa.",
-          "text": "Guarda esta calma contigo. Hoy vuelves a tu día sabiendo quién eres, cuánto has caminado y con qué serenidad eliges dar tu próximo paso."
+          "breath": "Nota el contacto con el lugar donde estás.",
+          "text": "Vuelve a sentir los pies. Escucha un sonido de la habitación. Si cerraste los ojos, ábrelos cuando te resulte cómodo. Puedes quedarte con este recuerdo, con una frase o simplemente con la pausa que acabas de darte. Tómate tu tiempo para volver a lo que sigue. Gracias por estar aquí, Pam."
         }
       ],
-      "question": "¿Qué etapa de tus más de once años de carrera agradeces hoy con más cariño al mirarla en perspectiva?",
-      "nextAction": "Revisa tu biblioteca de evidencias en el Diario o añade un logro que habías pasado por alto."
+      "question": "¿Qué te gustaría recordar de ti después de esta pausa?",
+      "nextAction": "Si te sirve, quédate con la frase que más se pareció a lo que necesitabas escuchar hoy."
     },
     {
       "id": "prog-2",
       "code": "Programa 02",
       "title": "Mi experiencia tiene valor",
-      "subtitle": "Trabajar la autocrítica con autocompasión, hechos autobiográficos y autoeficacia",
+      "subtitle": "Responder a la autocrítica con amabilidad y hechos de tu propia trayectoria.",
       "duration": "13 min",
       "preset": "forestRain",
       "chapters": [
         {
-          "title": "1. Identificar la voz autocrítica",
+          "title": "1. Escuchar la duda",
           "seconds": 100,
-          "breath": "Observa tus pensamientos sin pelear con ellos.",
-          "text": "Cuando aspiras a un escenario exigente e internacional, es normal que aparezca una voz de duda preguntando si estarás a la altura. Hoy no vamos a castigarnos por sentir esa duda. La reconocemos como un mecanismo antiguo que intenta protegerte de la exposición, pero elegimos responderle con serenidad y con hechos."
+          "breath": "Apoya los pies y nota el contacto.",
+          "text": "Pam, si hay una preocupación profesional dándote vueltas, deja que aparezca como una frase breve. Quizá sea: no sé si tengo la experiencia que buscan. Puedes reconocerla con otras palabras: estoy teniendo el pensamiento de que quizá me falte experiencia. Quédate un momento con esa frase. Vuelve al apoyo de los pies cuando quieras."
         },
         {
-          "title": "2. Diferenciar pensamientos de hechos",
+          "title": "2. Tomar un poco de distancia",
           "seconds": 110,
-          "breath": "Inhala claridad... exhala el juicio.",
-          "text": "Un pensamiento de inseguridad en un día de cansancio no es una verdad objetiva. Los pensamientos dudan; los hechos permanecen. Y los hechos de tu biografía dicen que llevas más de once años comunicando, gestionando cuentas, liderando personas y colaborando con equipos de distintos países."
+          "breath": "Deja que la respiración siga a su ritmo.",
+          "text": "Prueba hablarte por dentro usando tu propio nombre, con el mismo tono que usarías con una amiga. Pam, ¿qué le dirías a alguien en tu lugar? Quizá le dirías que primero mire qué pide el puesto y qué ejemplos puede dar. Escucha la respuesta que te salga. Si te suena más natural en primera persona, puedes decirla así."
         },
         {
-          "title": "3. Recuerdos autobiográficos concretos",
+          "title": "3. Recordar una escena concreta",
           "seconds": 115,
-          "breath": "Trae a tu mente una escena real donde resolviste un reto.",
-          "text": "Recuerda ahora una situación verdadera en BC Sales, en Hesta, en Trayken o Multimax, en los proyectos de InEnergy en Dubái, junto a Joc López o en SoftSvit. Recuerda el momento exacto en que ordenaste un proyecto, destrabaste una conversación con un cliente o guiaste a tu equipo. Esa capacidad sigue intacta dentro de ti."
+          "breath": "Nota cómo descansan tus manos.",
+          "text": "Elige una situación en la que un cliente o un equipo necesitaba algo que todavía no estaba claro. Recuerda qué viste, qué preguntaste y qué hiciste después. Quizá ordenaste un seguimiento, explicaste una decisión o ayudaste a dos personas a ponerse de acuerdo. Quédate con lo que recuerdes con claridad. Una escena sencilla basta."
         },
         {
-          "title": "4. Reconocimiento de habilidades transferibles",
+          "title": "4. Ponerle nombre a una habilidad",
           "seconds": 105,
-          "breath": "Respira sintiendo la solidez de tu perfil.",
-          "text": "Las industrias cambian de nombre, pero las organizaciones de élite —incluyendo la Fórmula 1— buscan exactamente lo que tú sabes hacer: comunicación corporativa clara, cuidado de patrocinadores y clientes, coordinación de eventos, operaciones comerciales y liderazgo humano."
+          "breath": "Deja un momento de silencio después de elegir.",
+          "text": "Mira qué habilidad se ve en esa escena. Si hiciste buenas preguntas, tal vez escuchaste con atención. Si explicaste un proceso a alguien con otro contexto, tal vez adaptaste tu comunicación. Completa la frase: en esa ocasión, yo aporté esto. Puedes usar las palabras que usarías al contárselo a alguien de confianza."
         },
         {
-          "title": "5. Construcción de autoeficacia serena",
+          "title": "5. Llevarte una frase creíble",
           "seconds": 90,
-          "breath": "Exhala largo y descansa en tu experiencia.",
-          "text": "No partes de una hoja en blanco. Partes de once años de evidencias reales. Lo que ya sabes hacer te respalda, y lo que aún no sepas lo aprenderás con la misma inteligencia con la que aprendiste en cada país y proyecto anterior."
+          "breath": "Vuelve al contacto de los pies con el suelo.",
+          "text": "Prueba esta frase: tengo ejemplos concretos de lo que sé hacer y puedo aprender lo que me falte. Ajústala hasta que suene a ti. Luego imagina que alguien te pide un ejemplo en una conversación. Recuerda solo la primera frase con la que empezarías a contarlo. Puedes volver a ella cuando la necesites."
         }
       ],
-      "question": "¿Qué hecho concreto de tu trayectoria responde hoy con claridad a cualquier pensamiento de duda?",
-      "nextAction": "Elige una de tus experiencias reales y úsala hoy para fortalecer una línea de tu CV o de tu preparación de entrevista."
+      "question": "¿Qué hiciste en la escena que recordaste y qué habilidad puso en juego?",
+      "nextAction": "Si te apetece, guarda ese ejemplo en una frase para tenerlo a mano antes de una entrevista."
     },
     {
       "id": "prog-3",
       "code": "Programa 03",
-      "title": "Mi futura yo trabaja en Fórmula 1",
-      "subtitle": "Visualización cinematográfica en el paddock y el encuentro con tu versión futura",
+      "title": "Mi camino hacia la Fórmula 1",
+      "subtitle": "Una visualización del paddock para explorar cómo quieres trabajar y ensayar un paso real.",
       "duration": "18 min",
       "preset": "horizonCinema",
       "chapters": [
         {
-          "title": "1. La llegada al paddock al amanecer",
+          "title": "1. Entrar en el paddock",
           "seconds": 120,
-          "breath": "Cierra los ojos y abre tus sentidos interiores.",
-          "text": "Respira profundamente y deja que se abra ante ti la mañana de un Gran Premio internacional. El aire es fresco y luminoso. Caminas con paso seguro hacia la entrada del paddock. Llevas puesta tu acreditación oficial de equipo. Sientes el roce del cordón sobre tu cuello y escuchas el murmullo profesional en inglés, español e italiano a tu alrededor."
+          "breath": "Mantén un punto de apoyo mientras imaginas.",
+          "text": "Imagina que llegas a un circuito por la mañana. Hay personal preparando el hospitality, gente revisando acreditaciones y conversaciones en varios idiomas. A lo lejos se oye actividad en el garaje. Puedes imaginarlo como una escena o simplemente seguir la historia con palabras. Dale unos segundos para que aparezca el detalle que más te llama."
         },
         {
-          "title": "2. Los motores y el equipo humano",
+          "title": "2. Descubrir qué trabajo te atrae",
           "seconds": 125,
-          "breath": "Escucha el paisaje del circuito con calma.",
-          "text": "A lo lejos ruge brevemente un motor desde el garaje, pero aquí en el corazón del paddock observas la verdadera maquinaria que hace posible el fin de semana: los equipos de comunicación corporativa, relaciones públicas, patrocinios, hospitality y operaciones comerciales. Ves cómo coordinan invitados globales, cuidan a los socios de la escudería y sostienen cada detalle con precisión."
+          "breath": "Respira a tu ritmo mientras observas la escena.",
+          "text": "Acércate a una parte del trabajo que te da curiosidad. Quizá sea recibir a invitados, coordinar a proveedores o resolver con calma una petición de un socio. Imagina la tarea en un día normal. Nota con quién hablarías, qué tendrías que averiguar y qué te gustaría aportar. Elige la parte que te interese de verdad."
         },
         {
-          "title": "3. El encuentro frente al motorhome",
+          "title": "3. Ensayar un momento de trabajo",
           "seconds": 120,
-          "breath": "Inhala profundo... acércate con confianza.",
-          "text": "Frente a la entrada acristalada del hospitality de una escudería, ves a una mujer conversando con su equipo. Tiene una presencia serena, cálida y ejecutiva. Cuando termina de dar una indicación, gira el rostro hacia ti y reconoces tus propios ojos. Es la Pamela del futuro. Te sonríe con una emoción tranquila y se acerca para hablar contigo."
+          "breath": "Vuelve al sonido de la habitación si lo prefieres.",
+          "text": "En tu escena, un invitado llega y su nombre no aparece en la lista. Imagina que le haces una pregunta clara, confirmas el dato con el equipo y le dices cuándo tendrás una respuesta. Escucha el tono que usarías. Deja unos segundos entre cada paso. Quizá reconozcas una forma de actuar que ya has usado en otro trabajo."
         },
         {
-          "title": "4. El discurso de tu Pamela del futuro",
+          "title": "4. Traer una prueba del presente",
           "seconds": 165,
-          "breath": "Recibe cada palabra en el centro del pecho.",
-          "text": "Ella toma tus manos y te dice con voz clara y profundamente humana: «Hola, Pam. Qué alegría que hayas venido a verme. Escúchame bien: no llegué a este paddock porque un día me volví perfecta o dejaron de existir los nervios. Llegué porque tú tomaste la decisión de no dejar tu sueño para después. Empezaste a postularte a las escuderías desde hoy mismo, aprendiendo qué pedía cada puesto. Y al mismo tiempo, fuiste sabia: seguiste creciendo en empresas internacionales, en eventos, en comunicación y en cuentas comerciales. Esos trabajos intermedios no fueron una distracción; fueron el puente que nos dio tranquilidad económica, contactos globales y la seguridad con la que hoy camino por este circuito. Todo lo que viviste en Argentina, en Estados Unidos con BC Sales, en Dubái con InEnergy, en Hesta, con Joc López y en SoftSvit nos trajo hasta aquí.»"
+          "breath": "Quédate un momento con el recuerdo.",
+          "text": "Recuerda una ocasión real en la que atendiste a alguien, aclaraste un malentendido o coordinaste algo con personas de distintos contextos. ¿Qué hiciste tú que ayudó? Si alguien del equipo te preguntara por tu experiencia, ensaya una frase breve con ese ejemplo. Puedes empezar por la situación y luego contar tu aporte."
         },
         {
-          "title": "5. Integrar la dirección y volver al presente",
+          "title": "5. Volver con un paso posible",
           "seconds": 100,
-          "breath": "Inhala integrando su serenidad... exhala regresando aquí.",
-          "text": "Tu versión futura te abraza y te recuerda: «Esta visión no es una promesa mágica; es un horizonte real que construimos juntas con cada candidatura, cada conversación y cada día bien vivido». Respira hondo y regresa a tu presente con el corazón firme y en paz."
+          "breath": "Nota las manos o el peso de los pies.",
+          "text": "Deja que la escena del circuito se aleje y vuelve al lugar en el que estás. Si quieres acercarte un poco a ese tipo de trabajo, elige un paso que quepa en tu semana. Leer una vacante, identificar una habilidad transferible o practicar cómo contar un caso. Imagina cuándo te vendría bien hacerlo. Puedes decidirlo más tarde si hoy prefieres descansar."
         }
       ],
-      "question": "¿Qué frase del mensaje de tu Pamela del futuro resonó con más fuerza dentro de ti hoy?",
-      "nextAction": "Da hoy un paso real hacia el paddock: revisa una vacante en los portales oficiales de Fórmula 1 o avanza en tu Camino B."
+      "question": "¿Qué parte del trabajo te atrajo y qué puedes explorar esta semana?",
+      "nextAction": "Si quieres continuar, elige una vacante real y anota un requisito para el que ya tengas un ejemplo."
     },
     {
       "id": "prog-4",
       "code": "Programa 04",
       "title": "Mi visión, mis decisiones",
-      "subtitle": "Contraste mental (WOOP), valores e intenciones de implementación prácticas",
+      "subtitle": "Elegir una meta, reconocer qué suele frenarte y preparar un plan concreto.",
       "duration": "11 min",
       "preset": "clarityPulse",
       "chapters": [
         {
-          "title": "1. Tus valores como brújula",
+          "title": "1. Elegir algo que te importe",
           "seconds": 95,
-          "breath": "Respira alineando mente y propósito.",
-          "text": "Toda decisión profesional cobra sentido cuando honra tus valores: excelencia humana, proyección internacional, autonomía financiera y paz interior. Hoy eliges decidir desde la claridad, no desde la prisa."
+          "breath": "Deja pasar una respiración antes de elegir.",
+          "text": "Piensa en algo profesional que te gustaría mover durante los próximos siete días. Puede estar ligado a Fórmula 1 o a un trabajo internacional que te acerque al tipo de entorno que quieres. Elige una meta que dependa en buena medida de ti. Completa por dentro: esta semana me gustaría hacer esto. Quédate con una sola."
         },
         {
-          "title": "2. Los dos caminos que se complementan",
+          "title": "2. Imaginar qué cambiaría",
           "seconds": 105,
-          "breath": "Inhala equilibrio entre el sueño y el presente.",
-          "text": "Visualiza tus dos rutas avanzando en armonía: el Camino A, donde te postulas directamente a roles en Fórmula 1, y el Camino B, donde construyes crecimiento e ingresos en empresas internacionales de comunicación, marketing, eventos y gestión comercial. Ambos caminos son parte de tu éxito."
+          "breath": "Mantén la respiración cómoda.",
+          "text": "Imagina que ya has dado ese paso. Si leíste una vacante, quizá ahora sabes qué experiencia destacar. Si escribiste a alguien, quizá terminaste un mensaje que llevabas días postergando. Nota qué sería valioso en ese resultado para ti. Elige un detalle concreto y deja que la imagen se vaya."
         },
         {
-          "title": "3. Contraste honesto con los obstáculos",
+          "title": "3. Ver el obstáculo",
           "seconds": 100,
-          "breath": "Mira el obstáculo con calma y sin juicio.",
-          "text": "Identifica con honestidad qué obstáculo interno suele aparecer cuando estás por postular: tal vez el deseo de que el CV esté perfecto, o el cansancio del día. Al verlo con claridad, deja de tener poder sobre ti."
+          "breath": "Si te distraes, regresa al punto de apoyo.",
+          "text": "Piensa qué suele aparecer justo antes de que pospongas ese paso. Tal vez te pones a revisar el CV entero, intentas encontrar la frase perfecta o abres varias vacantes y pierdes el hilo. Elige un obstáculo que puedas reconocer en el momento. Puedes mirarlo con curiosidad, como mirarías una costumbre que estás aprendiendo a cambiar."
         },
         {
-          "title": "4. Tu intención de implementación: Si sucede X, haré Y",
+          "title": "4. Preparar una respuesta",
           "seconds": 95,
-          "breath": "Sella tu compromiso con una respiración profunda.",
-          "text": "Formula mentalmente tu puente de acción: «Si aparece la duda o la postergación, entonces respiraré tres veces y dedicaré solo diez minutos a enviar o preparar mi candidatura». La acción concreta transforma tu visión en realidad."
+          "breath": "Deja unos segundos para formular tu plan.",
+          "text": "Completa por dentro: si aparece este obstáculo, entonces haré esta acción. Por ejemplo: si empiezo a retocar todo el CV, entonces dedicaré diez minutos a adaptar solo el primer párrafo. Haz que la acción sea clara y pequeña. Imagina el momento en que aparece la señal y lo primero que harías. Cuando quieras, vuelve al lugar donde estás."
         }
       ],
-      "question": "Completa tu compromiso de hoy: «Si aparece el obstáculo de [...], entonces haré [...]».",
-      "nextAction": "Marca el paso correspondiente de tu Semana 1 en la sección Ruta F1."
+      "question": "¿Qué situación te servirá de señal y qué harás cuando aparezca?",
+      "nextAction": "Si te ayuda, guarda tu plan en una sola frase que empiece por «Si…» y termine con una acción que puedas hacer."
     },
     {
       "id": "prog-5",
       "code": "Programa 05",
       "title": "Antes de una entrevista",
-      "subtitle": "Meditación breve de 5 minutos para hablar con confianza, claridad y precisión",
+      "subtitle": "Llegar a la conversación con un punto de apoyo y un ejemplo listo para contar.",
       "duration": "5 min",
       "preset": "warmSanctuary",
       "chapters": [
         {
-          "title": "1. Calmar el sistema nervioso",
+          "title": "1. Acomodarte antes de entrar",
           "seconds": 95,
-          "breath": "Doble inhalación nasal y exhalación larga por la boca.",
-          "text": "Estás a pocos minutos de tu entrevista. Inhala profundamente por la nariz, toma un pequeño sorbo extra de aire y suéltalo muy despacio. Tus hombros bajan, tu garganta se relaja y tu mente se vuelve nítida."
+          "breath": "Apoya los pies y suelta el aire con suavidad, si te resulta cómodo.",
+          "text": "Hola, Pam. Si tienes los ojos abiertos, puedes dejarlos así. Siente los pies en el suelo y deja descansar las manos. Si notas nervios, puedes nombrarlos por dentro: estoy nerviosa porque esta conversación me importa. Dale unos segundos a esa sensación. Respira a tu ritmo mientras miras un punto del lugar donde estás."
         },
         {
-          "title": "2. Conectar con tus evidencias reales",
+          "title": "2. Elegir un ejemplo que conozcas",
           "seconds": 110,
-          "breath": "Siente tus pies firmes sobre el suelo.",
-          "text": "No vas a pedir permiso; vas a conversar de igual a igual como una profesional con más de once años de trayectoria, liderazgo de equipos de quince personas y experiencia internacional en español e inglés. Tus historias en BC Sales, Hesta, InEnergy, Joc López, SoftSvit, Trayken y Multimax son verdaderas."
+          "breath": "Deja una respiración entre cada parte del recuerdo.",
+          "text": "Recuerda un caso que conozcas bien. Puede ser un cliente que necesitaba orientación o una situación que pedía seguimiento. Empieza por lo que estaba pasando. Di por dentro qué hiciste tú. Termina con lo que cambió o aprendiste. Si no recuerdas una cifra, puedes explicar el resultado con las palabras que tengas a mano."
         },
         {
-          "title": "3. Entrar con serenidad y presencia",
+          "title": "3. Ensayar cómo empiezas",
           "seconds": 95,
-          "breath": "Inhala confianza... exhala con una suave sonrisa.",
-          "text": "Habla pausado, escucha con atención ypermítete responder con claridad ejecutiva. Estás preparada. Entra y disfruta la conversación."
+          "breath": "Vuelve al apoyo de los pies cuando quieras.",
+          "text": "Imagina que escuchas la primera pregunta. Date un instante antes de responder. Si es amplia, puedes empezar con estas palabras: un ejemplo que ilustra mi experiencia es… Y después cuentas el caso con tu propia voz. Si necesitas que aclaren una pregunta, puedes pedirlo con tranquilidad. Cuando estés lista, vuelve a lo que tienes delante."
         }
       ],
-      "question": "¿Cuáles son los 2 logros concretos que vas a mencionar hoy cuando te pregunten por tu experiencia?",
-      "nextAction": "Ten a mano un vaso de agua, respira hondo y entra a tu entrevista."
+      "question": "¿Con qué ejemplo te gustaría empezar si te preguntan por tu experiencia?",
+      "nextAction": "Si tienes un momento, repasa una vez la primera frase de tu ejemplo y entra a la conversación."
     },
     {
       "id": "prog-6",
       "code": "Programa 06",
       "title": "Después de un rechazo",
-      "subtitle": "Procesar emociones, separar el resultado de tu valor y elegir el siguiente paso sin autocrítica",
+      "subtitle": "Dar espacio a lo que sientes, poner el resultado en perspectiva y elegir qué necesitas hoy.",
       "duration": "9 min",
       "preset": "forestRain",
       "chapters": [
         {
-          "title": "1. Dar espacio a la emoción sin juzgarte",
+          "title": "1. Dar espacio a lo que sientes",
           "seconds": 115,
-          "breath": "Exhala largo, soltando el peso del pecho.",
-          "text": "Si hoy recibiste una respuesta negativa o un silencio tras haberte ilusionado, date permiso de sentirlo con humanidad. No tienes que fingir indiferencia. Acompáñate hoy con respeto y calidez."
+          "breath": "Vuelve a los pies o a un sonido si lo necesitas.",
+          "text": "Pam, si una respuesta te dolió o te dejó cansada, puedes reconocerlo a tu manera. Quizá sientas decepción, rabia, alivio o varias cosas juntas. Elige una palabra si te sirve. Si prefieres dejar de pensar en el mensaje, mira un objeto cercano y nota su color o su forma. Puedes volver a él en cualquier momento."
         },
         {
-          "title": "2. El resultado de un proceso no define tu valor",
+          "title": "2. Mirar el resultado con perspectiva",
           "seconds": 120,
-          "breath": "Inhala perspectiva y dignidad profesional.",
-          "text": "Una selección laboral depende de decenas de factores ajenos a ti: presupuestos que cambian, candidatos internos o ubicación geográfica. Un «no» puntual informa sobre el encaje de una vacante hoy, pero jamás disminuye tus once años de carrera ni tu capacidad para llegar a grandes equipos."
+          "breath": "Mantén los ojos abiertos si te resulta más cómodo.",
+          "text": "Recuerda lo que sabes con certeza sobre este proceso. Quizá recibiste una respuesta breve o sigues esperando. Ahora recuerda algo que también sabes de ti por experiencia propia. Tal vez preparaste bien una respuesta o te animaste a enviar la candidatura. Puedes dejar ambas cosas donde están y hablarte como le hablarías a una amiga que acaba de pasar por lo mismo."
         },
         {
-          "title": "3. Aprendizaje limpio y descanso",
+          "title": "3. Elegir cómo cerrar el día",
           "seconds": 105,
-          "breath": "Respira suave y reparadoramente.",
-          "text": "Reconoce tu valentía por estar en el ruedo postulando y creciendo. Toma cualquier aprendizaje práctico para afinar tu próximo paso, suelta el reproche y regálate descanso hoy."
+          "breath": "Nota una última vez el contacto con el suelo.",
+          "text": "Pregúntate qué te haría bien en la próxima hora. Quizá descansar, salir a caminar o hablar con alguien. Si más adelante quieres revisar la candidatura, puedes elegir un solo detalle para ajustar. Si hoy necesitas cerrar el correo y seguir con tu día, también puedes hacerlo. Tómate un momento antes de levantarte."
         }
       ],
-      "question": "¿Qué aprendizaje útil puedes guardar de esta experiencia sin hablarte con dureza?",
-      "nextAction": "Actualiza el estado de la candidatura en tu Ruta F1 y descansa con tranquilidad."
+      "question": "¿Qué necesitas ahora mismo, descanso o un paso pequeño que puedas decidir después?",
+      "nextAction": "Si mañana quieres revisar el proceso, elige un solo detalle. También puedes dejarlo aquí por hoy."
     }
   ],
   "evidences": [
