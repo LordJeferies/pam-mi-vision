@@ -1,29 +1,19 @@
-# Pam · Mi visión — V2 Alfa
+# Pam · Mi visión
 
-**PWA mobile-first**, independiente y sin framework ni CDNs. Mantiene los seis programas y 27 capítulos del HTML Alfa Pro suministrado, con navegación nueva, lectura ajustable y contraste mejorado.
+PWA personal para iPhone y escritorio. **Iniciar** abre *Volver a mí* con música y narración, y **Continuar** recupera el punto guardado cuando se interrumpe una sesión. En **Más opciones** viven las otras meditaciones, el diario, el camino profesional y la visión.
 
-## Incluye
+## Meditaciones
 
-- Seis programas guiados con 27 capítulos, capítulo actual y progreso, modo lectura, temporizador y narración opcional por `speechSynthesis`.
-- Sonido ambiental sintetizado mediante Web Audio API (no son pistas musicales comerciales ni voz IA remota). El sonido necesita iniciarse desde un toque del usuario; la voz del dispositivo depende del navegador.
-- Diario editable, biblioteca de evidencias, estado de postulaciones, plan de siete días, rutas A y B, declaración de visión y ejercicio de planificación.
-- Guardado local; migración de datos del identificador `pam_mi_vision_calm_v3` de la versión recibida (cuando existe); exportación/importación de respaldo JSON.
-- PWA con manifest, iconos PNG y caché offline de los archivos de la aplicación.
-- Temas oscuro y claro, escalado de letra 100–140%, teclado y movimiento reducido.
+- Seis sesiones y 27 capítulos narrados en español latino. Las grabaciones incluyen música ambiental original, pausas de reflexión y transcripciones que siguen el audio.
+- El reproductor usa pistas MP3 premezcladas y las marcas de capítulo de `meditation-audio.js`.
+- Voz sintética Laura de [HirCoir](https://huggingface.co/HirCoir/Piper-TTS-Laura), utilizada para esta aplicación personal y gratuita bajo [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). Velocidad, pausas y mezcla adaptadas para las sesiones. El sitio no carga el modelo ni llama a un servicio de voz.
+- Referencias de los guiones: [atención plena](https://oxfordmindfulness.org/resources/mindfulness-a-practical-guide-to-finding-peace-in-a-frantic-world-by-mark-williams-and-danny-penman-2), [autocompasión](https://pubmed.ncbi.nlm.nih.gov/37362192/), [etiquetado emocional](https://pubmed.ncbi.nlm.nih.gov/17576282/), [diálogo interno con distancia](https://pubmed.ncbi.nlm.nih.gov/24467424/) y [planificación con contraste mental](https://doi.org/10.3389/fpsyg.2021.565202). Los estudios evalúan las prácticas en sus propios contextos. Los guiones de Pam no son una intervención clínica validada.
 
-## Publicar
+## Uso y datos
 
-En macOS, descarga `Pam_Mi_Vision_V2_Alfa_GitHubPages.zip` a `~/Downloads` y ejecuta `bash PUBLICAR_MAC.command` desde la carpeta extraída, o utiliza el comando que acompaña la entrega para extraer y ejecutar este script desde el ZIP.
+El progreso, el diario y las herramientas profesionales se guardan en el navegador. Los respaldos JSON existentes siguen siendo compatibles. Tras una primera visita, la PWA conserva la interfaz y las transcripciones para usarlas sin conexión. Las pistas usan la conexión al sitio.
 
-Repositorio: https://github.com/LordJeferies/pam-mi-vision  
-Sitio: https://lordjeferies.github.io/pam-mi-vision/
+Para servirla localmente desde la raíz del repositorio, usa `python3 -m http.server 8000` y abre `http://localhost:8000`.
 
-## Privacidad y límites
-
-Los datos personales se guardan **solo en este navegador**; no se comparten entre teléfonos. Exporta respaldos de vez en cuando. No hay API de empleos en vivo, ni narración premium de pago ni sincronización entre dispositivos. `speechSynthesis` puede pausarse o detenerse si iOS suspende la pestaña. El audio ambiental es un fondo de ruido filtrado sin música comercial. La PWA necesita HTTPS para la instalación y caché; abrir index.html con `file://` no habilita el service worker.
-
-Las lecturas CEE/Neville son contenidos de reflexión filosófico-espiritual, no pruebas de manifestación garantizada. Los perfiles profesionales del material aportado deben confirmarse antes de utilizarlos en candidaturas. El contenido no sustituye asesoría profesional clínica.
-
-## Cambios respecto al HTML original
-
-Se reemplazó el CDN de Tailwind por CSS autocontenido; se eliminó el falso indicador de megabytes de audio y la opción de Gemini TTS sin clave; se simplificó la UI a cinco secciones, un reproductor por capítulo y formularios de una tarea a la vez; se conservaron datos y capítulos; se agregaron validaciones de entrada y respaldo estructurado. La V2 Alfa es una versión funcional **sin conexión backend**, no una versión comercial final ni equivalente a Calm en catálogo/licencias.
+- [Sitio](https://lordjeferies.github.io/pam-mi-vision/)
+- [Repositorio](https://github.com/LordJeferies/pam-mi-vision)

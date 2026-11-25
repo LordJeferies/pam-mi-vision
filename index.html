@@ -1,7 +1,49 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#102e32"><meta name="description" content="Un espacio personal para meditar, reconocer tu trayectoria y avanzar hacia tu visión profesional."><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Pam · Mi visión"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./assets/icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="./assets/icon-192.png"><link rel="stylesheet" href="./styles.css"><title>Pam · Mi visión | V2 Alfa</title></head><body>
-<div class="ambient-art" aria-hidden="true"><div class="aurora"></div><div class="horizon"></div></div>
-<div class="app-shell"><header class="topbar"><button class="brand" id="brand" type="button" aria-label="Volver al inicio"><span class="brand-symbol">✳</span><span><strong>Pam · Mi visión</strong><small>Tu espacio para volver a ti</small></span></button><div class="top-actions"><button id="audioToggle" class="icon-btn" type="button" aria-label="Activar música ambiental" title="Música ambiental">♫</button><button id="fontToggle" class="icon-btn" type="button" aria-label="Cambiar tamaño de letra" title="Tamaño de lectura">Aa</button><button id="themeToggle" class="icon-btn" type="button" aria-label="Cambiar tema" title="Tema claro/oscuro">◐</button></div></header>
-<main id="view" tabindex="-1"></main><nav class="bottom-nav" aria-label="Navegación principal"><button data-route="home" class="nav-item" type="button"><span>⌂</span>Inicio</button><button data-route="meditate" class="nav-item" type="button"><span>◉</span>Meditar</button><button data-route="route" class="nav-item" type="button"><span>↗</span>Mi camino</button><button data-route="journal" class="nav-item" type="button"><span>✎</span>Diario</button><button data-route="vision" class="nav-item" type="button"><span>✧</span>Visión</button></nav></div>
-<div id="dialog" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="dialogTitle"><div class="dialog-panel"><div class="dialog-head"><h2 id="dialogTitle"></h2><button id="closeDialog" class="icon-btn" aria-label="Cerrar">✕</button></div><div id="dialogBody"></div></div></div>
-<div id="toast" role="status" aria-live="polite"></div>
-<script src="./data.js"></script><script src="./app.js"></script></body></html>
+<!doctype html>
+<html lang="es" class="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f8f2ec">
+  <meta name="description" content="Un espacio personal para meditar, reconocer tu trayectoria y avanzar hacia tu visión profesional.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Pam · Mi visión">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./assets/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="./assets/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <title>Pam · Mi visión</title>
+</head>
+<body data-view="home">
+  <div class="ambient-art" aria-hidden="true"><div class="aurora"></div><div class="horizon"></div></div>
+  <div class="app-shell">
+    <header class="topbar">
+      <button class="brand" id="brand" type="button" aria-label="Pam · Mi visión, volver al inicio">
+        <span class="brand-symbol" aria-hidden="true">✧</span>
+        <strong>Pam · Mi visión</strong>
+      </button>
+      <div class="top-actions">
+        <button id="fontToggle" class="icon-btn" type="button" aria-label="Cambiar tamaño de letra" title="Tamaño de lectura">Aa</button>
+        <button id="themeToggle" class="icon-btn" type="button" aria-label="Cambiar tema" title="Tema claro u oscuro">◐</button>
+      </div>
+    </header>
+    <main id="view" tabindex="-1"></main>
+    <nav class="bottom-nav" aria-label="Navegación principal">
+      <button data-route="home" class="nav-item" type="button"><span aria-hidden="true">⌂</span>Inicio</button>
+      <button data-route="meditate" class="nav-item" type="button"><span aria-hidden="true">◉</span>Meditar</button>
+      <button data-route="route" class="nav-item" type="button"><span aria-hidden="true">↗</span>Mi camino</button>
+      <button data-route="journal" class="nav-item" type="button"><span aria-hidden="true">✎</span>Diario</button>
+      <button data-route="vision" class="nav-item" type="button"><span aria-hidden="true">✧</span>Visión</button>
+    </nav>
+  </div>
+  <div id="dialog" class="modal" hidden role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+    <div class="dialog-panel">
+      <div class="dialog-head"><h2 id="dialogTitle"></h2><button id="closeDialog" class="icon-btn" aria-label="Cerrar">✕</button></div>
+      <div id="dialogBody"></div>
+    </div>
+  </div>
+  <div id="toast" role="status" aria-live="polite"></div>
+  <script src="./data.js"></script>
+  <script src="./meditation-audio.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

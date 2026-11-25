@@ -1,28 +1,304 @@
-/* Pam · Mi visión V2 Alfa — sin dependencias externas ni claves API. */
+/* Pam · Mi visión */
 (()=>{'use strict';
-const D=window.PAM_DATA, KEY='pam_mi_vision_v2_alfa';
-const defaultState={theme:'dark',font:1,route:'home',lastProgram:'prog-1',lastChapter:0,completed:[],sessions:[],journal:[],evidences:D.evidences.map(x=>({...x})),applications:[],firstWeek:D.firstWeekPlan.map(x=>({...x})),vision:'Vivo mi presente con dignidad y dirección. Puedo postularme a Fórmula 1 desde hoy y seguir creciendo mediante oportunidades profesionales compatibles con mi experiencia.',woop:{wish:'Trabajar en Fórmula 1 en comunicación, alianzas, eventos o gestión comercial.',outcome:'Aportar mi experiencia a un equipo internacional y desarrollar nuevas capacidades.',obstacle:'Esperar a sentir que mi CV es perfecto.',plan:'Si aparece esa duda, dedicaré quince minutos a preparar o enviar una candidatura.'},mood:[],readMode:false,volume:.18};
-const clone=x=>JSON.parse(JSON.stringify(x));let state=clone(defaultState);try{const old=JSON.parse(localStorage.getItem(KEY)||'null');if(old&&typeof old==='object')state={...state,...old,woop:{...state.woop,...old.woop}};else{const legacy=JSON.parse(localStorage.getItem('pam_mi_vision_calm_v3')||'null');if(legacy){state.journal=legacy.journalEntries||[];state.evidences=legacy.evidences||[];state.applications=legacy.applications||[];state.firstWeek=legacy.firstWeek||state.firstWeek;state.vision=legacy.visionStatement||state.vision;state.completed=legacy.completedPrograms||[];state.lastProgram=legacy.lastSession?.programId||'prog-1';state.lastChapter=legacy.lastSession?.chapterIdx||0;state.woop={wish:legacy.woopWish||state.woop.wish,outcome:state.woop.outcome,obstacle:legacy.woopObstacle||state.woop.obstacle,plan:`Si ${legacy.woopIf||'surge la duda'}, entonces ${legacy.woopThen||'haré una acción concreta'}.`};}}}catch(e){console.warn('No se pudo recuperar almacenamiento',e)}
+const D=window.PAM_DATA, AUDIO=window.PAM_AUDIO, KEY='pam_mi_vision_v2_alfa';
+const defaultState={theme:'light',paletteVersion:3,font:1,route:'home',lastProgram:'prog-1',lastChapter:0,completed:[],sessions:[],journal:[],evidences:D.evidences.map(x=>({...x})),applications:[],firstWeek:D.firstWeekPlan.map(x=>({...x})),vision:'Vivo mi presente con dignidad y dirección. Puedo postularme a Fórmula 1 desde hoy y seguir creciendo mediante oportunidades profesionales compatibles con mi experiencia.',woop:{wish:'Trabajar en Fórmula 1 en comunicación, alianzas, eventos o gestión comercial.',outcome:'Aportar mi experiencia a un equipo internacional y desarrollar nuevas capacidades.',obstacle:'Esperar a sentir que mi CV es perfecto.',plan:'Si aparece esa duda, dedicaré quince minutos a preparar o enviar una candidatura.'},mood:[],meditationResume:null};
+const clone=x=>JSON.parse(JSON.stringify(x));let state=clone(defaultState);let migrateChapter=false;try{const old=JSON.parse(localStorage.getItem(KEY)||'null');if(old&&typeof old==='object'){migrateChapter=old.paletteVersion!==3;state={...state,...old,theme:migrateChapter?'light':old.theme,woop:{...state.woop,...old.woop}};}else{const legacy=JSON.parse(localStorage.getItem('pam_mi_vision_calm_v3')||'null');if(legacy){migrateChapter=true;state.journal=legacy.journalEntries||[];state.evidences=legacy.evidences||[];state.applications=legacy.applications||[];state.firstWeek=legacy.firstWeek||state.firstWeek;state.vision=legacy.visionStatement||state.vision;state.completed=legacy.completedPrograms||[];state.lastProgram=legacy.lastSession?.programId||'prog-1';state.lastChapter=legacy.lastSession?.chapterIdx||0;state.woop={wish:legacy.woopWish||state.woop.wish,outcome:state.woop.outcome,obstacle:legacy.woopObstacle||state.woop.obstacle,plan:`Si ${legacy.woopIf||'surge la duda'}, entonces ${legacy.woopThen||'haré una acción concreta'}.`};}}}catch(e){console.warn('No se pudo recuperar almacenamiento',e)}
+if (migrateChapter && !state.meditationResume && state.lastChapter > 0 && !state.completed.includes(state.lastProgram)) {
+  const resumeAt = AUDIO[state.lastProgram]?.chapters?.[state.lastChapter];
+  if (Number.isFinite(resumeAt)) state.meditationResume = {id: state.lastProgram, seconds: resumeAt};
+}
 const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));const uid=()=>String(Date.now())+Math.random().toString(36).slice(2,7);const today=()=>new Date().toLocaleDateString('en-CA');const dateFmt=d=>{try{return new Date(`${d}T12:00:00`).toLocaleDateString('es',{day:'numeric',month:'short',year:'numeric'})}catch{return d}};
 function save(){try{localStorage.setItem(KEY,JSON.stringify(state));return true}catch(e){toast('Almacenamiento lleno. Exporta un respaldo.');return false}}
 function toast(msg){const e=$('#toast');e.textContent=msg;e.classList.add('visible');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('visible'),2800)}
-function applyPrefs(){document.documentElement.classList.toggle('light',state.theme==='light');document.documentElement.style.setProperty('--scale',String(state.font));document.documentElement.classList.toggle('reading-mode',state.readMode);$('#audioToggle').classList.toggle('is-on',audio.on)}
+function applyPrefs(){document.documentElement.classList.toggle('light',state.theme==='light');document.documentElement.style.setProperty('--scale',String(state.font));document.documentElement.classList.toggle('reading-mode',state.readMode)}
 function wrap(head,body,subtitle=''){return `<div class="section-head"><div><div class="eyebrow">${head}</div>${subtitle?`<p class="muted small">${subtitle}</p>`:''}</div></div>${body}`}
-let current='home', selectedTrack='all', diaryTab='all', p=null, pIdx=0, playing=false, seconds=0, ticker=null, narrating=false, speechToken=0, showContents=false;
-const audio={ctx:null,source:null,gain:null,filter:null,on:false,preset:'warm',async start(preset){this.preset=preset||this.preset;try{const AC=window.AudioContext||window.webkitAudioContext;if(!AC){toast('Tu navegador no permite audio ambiental');return}if(!this.ctx){this.ctx=new AC();const size=this.ctx.sampleRate*4;const buffer=this.ctx.createBuffer(2,size,this.ctx.sampleRate);for(let channel=0;channel<2;channel++){const ar=buffer.getChannelData(channel);let x=0;for(let i=0;i<size;i++){x=.989*x+(Math.random()*2-1)*.038;ar[i]=x*.44}}this.source=this.ctx.createBufferSource();this.source.buffer=buffer;this.source.loop=true;this.filter=this.ctx.createBiquadFilter();this.filter.type='lowpass';this.filter.frequency.value=470;this.gain=this.ctx.createGain();this.gain.gain.value=0;this.source.connect(this.filter);this.filter.connect(this.gain);this.gain.connect(this.ctx.destination);this.source.start()}await this.ctx.resume();this.on=true;this.setVolume(state.volume);applyPrefs()}catch(e){toast('No se pudo iniciar el sonido en este dispositivo');console.warn(e)}},stop(){this.on=false;this.gain?.gain.setTargetAtTime(0,this.ctx.currentTime,.13);applyPrefs()},toggle(){this.on?this.stop():this.start()},setVolume(value){state.volume=Number(value);if(this.gain&&this.ctx)this.gain.gain.setTargetAtTime(this.on?state.volume:0,this.ctx.currentTime,.12);save()},bell(){if(!this.ctx||!this.on)return;const t=this.ctx.currentTime,o=this.ctx.createOscillator(),g=this.ctx.createGain();o.type='sine';o.frequency.value=384;g.gain.setValueAtTime(.0001,t);g.gain.exponentialRampToValueAtTime(.028,t+.03);g.gain.exponentialRampToValueAtTime(.0001,t+2);o.connect(g);g.connect(this.ctx.destination);o.start(t);o.stop(t+2.1)}};
-function stopSpeech(){speechToken++;narrating=false;try{speechSynthesis.cancel()}catch(e){} updateSpeakBtn()}
-function speak(text){stopSpeech();if(!('speechSynthesis'in window)){toast('No hay narración en este navegador');return}const token=++speechToken, sentences=(text.match(/[^.!?…]+[.!?…]?/g)||[text]).map(s=>s.trim()).filter(Boolean);let i=0;narrating=true;updateSpeakBtn();function next(){if(token!==speechToken)return;if(i>=sentences.length){narrating=false;updateSpeakBtn();return}const u=new SpeechSynthesisUtterance(sentences[i++]);u.lang='es-ES';u.rate=.84;u.pitch=1;u.volume=1;const v=speechSynthesis.getVoices().find(v=>v.lang.toLowerCase().startsWith('es'));if(v)u.voice=v;u.onend=()=>{if(token===speechToken)setTimeout(next,540)};u.onerror=()=>{narrating=false;updateSpeakBtn()};speechSynthesis.speak(u)}next()}
-function updateSpeakBtn(){const b=$('#speakBtn');if(b)b.textContent=narrating?'Detener voz':'Escuchar capítulo'}
-function openDialog(title,html){$('#dialogTitle').textContent=title;$('#dialogBody').innerHTML=html;$('#dialog').hidden=false;$('#closeDialog').focus()};function closeDialog(){$('#dialog').hidden=true;$('#dialogBody').innerHTML=''}
-function nav(route){stopSpeech();stopTimer();p=null;playing=false;current=route;state.route=route;save();$$('.nav-item').forEach(b=>{b.classList.toggle('active',b.dataset.route===route);b.setAttribute('aria-current',b.dataset.route===route?'page':'false')});$('#view').innerHTML=({home:homeView,meditate:meditateView,route:careerView,journal:journalView,vision:visionView})[route]();window.scrollTo({top:0,behavior:'instant'});bindView()}
-function homeView(){let done=state.firstWeek.filter(t=>t.done).length;const last=D.programs.find(x=>x.id===state.lastProgram)||D.programs[0];return `<section class="hero"><div class="eyebrow">TU SANTUARIO · V2 ALFA</div><h1>Todo lo que has vivido cuenta.</h1><p class="lead">Una pausa para reconocer tu camino. Un lugar para escucharte, escribir tu historia y avanzar hacia la vida profesional que deseas, sin dejar tu presente en suspenso.</p><div class="button-row"><button class="btn primary" data-action="open-last">Continuar mi meditación</button><button class="btn ghost" data-route="meditate">Explorar sesiones</button></div></section><div class="section-head"><div><div class="eyebrow">TU PRÁCTICA</div><h2>Un paso a la vez.</h2></div></div><div class="grid"><article class="card"><div class="eyebrow">HOY · VOLVER A MÍ</div><h3>${esc(last.title)}</h3><p>${esc(last.subtitle)}</p><div class="button-row"><button class="btn soft" data-action="open-last">Reanudar · capítulo ${state.lastChapter+1}</button></div></article><article class="card"><div class="eyebrow">EL SUEÑO Y EL PRESENTE</div><h3>Dos caminos. Una dirección.</h3><p>Postularte desde ahora a Fórmula 1, mientras construyes experiencia, oportunidades y estabilidad en otros equipos.</p><div class="button-row"><button class="btn soft" data-route="route">Ver mis próximos pasos</button></div></article></div><div class="section-head"><div><div class="eyebrow">AVANCES REALES</div><h2>No necesitas correr.</h2></div></div><div class="metrics"><div class="card"><div class="stat">${state.completed.length}/6</div><p>Programas</p></div><div class="card"><div class="stat">${done}/7</div><p>Semana inicial</p></div><div class="card"><div class="stat">${state.journal.length}</div><p>Reflexiones</p></div></div><div class="card" style="margin-top:16px"><div class="eyebrow">TU SIGUIENTE PASO</div><p class="lead">«Mi pasado me dio experiencia. Mi presente me permite elegir. Mi futuro se construye con decisiones concretas».</p><div class="button-row"><button class="btn ghost" data-route="journal">Escribir una reflexión</button></div></div>`}
-function meditateView(){return wrap('BIBLIOTECA · 6 EXPERIENCIAS',`<h1>Encuentra tu ritmo.</h1><p class="lead" style="margin:16px 0 26px">Elige la experiencia que necesitas hoy. Cada sesión está dividida en capítulos breves: puedes leer, escuchar, pausar o retomar.</p><div class="grid">${D.programs.map((x,i)=>`<article class="card program-card clickable"><div><div class="eyebrow">${esc(x.code)} · ${x.chapters.length} capítulos</div><h2 style="font-size:clamp(1.75rem,3vw,2.4rem);margin-top:15px">${esc(x.title)}</h2><p>${esc(x.subtitle)}</p></div><div class="row" style="margin-top:20px"><span class="tag">${esc(x.duration)} orientativos</span><button class="btn primary" data-program="${x.id}">${state.completed.includes(x.id)?'Repetir':'Comenzar'} ↗</button></div></article>`).join('')}</div><div class="info">Las duraciones son orientativas: la voz del dispositivo, las pausas y la lectura personal pueden variar. No hay obligación de completar una sesión.</div>`)}
-function openProgram(id,index=0){p=D.programs.find(x=>x.id===id);if(!p)return;pIdx=Math.max(0,Math.min(index,p.chapters.length-1));state.lastProgram=id;state.lastChapter=pIdx;save();playing=false;seconds=0;stopTimer();stopSpeech();renderPlayer('prepare')}
-function renderPlayer(stage='chapter'){if(!p)return;let ch=p.chapters[pIdx],progress=(pIdx/p.chapters.length*100);let body='';if(stage==='prepare'){body=`<div class="player-stage"><div class="eyebrow">PREPARACIÓN</div><div class="orb" aria-hidden="true"></div><h2>Este momento es tuyo.</h2><p class="lead" style="text-align:center;margin:18px auto 0">Busca una posición cómoda. Puedes mantener los ojos abiertos, bajar la mirada o cerrarlos si lo deseas. La música es opcional.</p><div class="button-row" style="justify-content:center"><button class="btn primary" id="startProgram">Empezar sesión</button></div></div>`}else if(stage==='finish'){body=`<div class="player-stage"><div class="eyebrow">INTEGRACIÓN</div><h2 style="margin:18px auto">Tu experiencia cuenta.</h2><p class="lead" style="text-align:center">${esc(p.question)}</p><div class="form-group" style="width:100%;max-width:550px"><label class="label" for="reflectionText">Tu reflexión, en tus propias palabras</label><textarea id="reflectionText" class="field" placeholder="Escribe lo que quieras recordar de esta sesión..."></textarea></div><div class="button-row" style="justify-content:center"><button class="btn primary" id="saveReflection">Guardar reflexión</button><button class="btn ghost" data-route="route">Ir a mi camino</button></div></div><div class="note" style="margin-top:18px">${esc(p.nextAction)}</div>`}else{body=`<div class="player-stage"><div class="eyebrow">CAPÍTULO ${pIdx+1} DE ${p.chapters.length}</div><div class="orb ${playing?'':'static'}" aria-hidden="true"></div><h2 class="player-title">${esc(ch.title.replace(/^\d+\.\s*/,''))}</h2><p class="muted small">${esc(ch.breath)}</p><p class="player-text">${esc(ch.text)}</p></div><div class="player-controls"><div class="row"><span class="small muted">${playing?'En curso':'En pausa'} · ${format(seconds)} / ${format(ch.seconds)}</span><span class="small muted">${Math.round((pIdx+1)/p.chapters.length*100)}% de capítulos</span></div><div class="progress-rail"><i style="width:${Math.min(seconds/ch.seconds*100,100)}%" id="timeProgress"></i></div><div class="button-row"><button id="prevChapter" class="btn soft" ${pIdx===0?'disabled':''}>← Anterior</button><button class="btn primary" id="pauseChapter">${playing?'Pausar':'Continuar'}</button><button class="btn soft" id="nextChapter">${pIdx===p.chapters.length-1?'Terminar':'Siguiente →'}</button></div><div class="button-row"><button class="btn ghost" id="speakBtn">${narrating?'Detener voz':'Escuchar capítulo'}</button><button class="btn ghost" id="readToggle">${state.readMode?'Lectura normal':'Modo lectura'}</button></div><label class="small muted" for="ambientVolume">Volumen de ambiente</label><input type="range" id="ambientVolume" min="0" max="0.4" step="0.02" value="${state.volume}" aria-label="Volumen del sonido ambiental"><button class="linkbtn" id="audioInPlayer">${audio.on?'Detener música':'Activar música'}</button></div><div class="chapter-list"><div class="eyebrow">CAPÍTULOS DEL RECORRIDO</div>${p.chapters.map((c,i)=>`<button class="chapter-line ${i===pIdx?'active':''}" data-chapter="${i}"><span>${esc(c.title)}</span><small>${format(c.seconds)}</small></button>`).join('')}</div>`}
-$('#view').innerHTML=`<div class="player"><div class="player-top"><button class="btn ghost" id="exitPlayer">← Biblioteca</button><span class="tag accent">${esc(p.code)} · ${esc(p.title)}</span></div><div class="progress-rail" style="margin-bottom:20px"><i style="width:${progress}%"></i></div>${body}</div>`;$$('.nav-item').forEach(x=>x.classList.remove('active'));window.scrollTo({top:0,behavior:'instant'});$('#exitPlayer').onclick=()=>nav('meditate');if(stage==='prepare'){$('#startProgram').onclick=()=>{audio.start(p.preset);playing=true;seconds=0;renderPlayer('chapter');startTimer()}}else if(stage==='finish'){$('#saveReflection').onclick=()=>{const content=$('#reflectionText').value.trim();if(content)state.journal.unshift({id:uid(),date:today(),category:'Meditación',title:p.title,content});if(!state.completed.includes(p.id))state.completed.push(p.id);state.sessions.unshift({id:uid(),date:today(),program:p.title});save();toast('Reflexión guardada');nav('journal')}}else{bindPlayer()}bindGeneric()}
-function bindPlayer(){$('#pauseChapter').onclick=()=>{playing=!playing;if(playing){startTimer()}else{stopTimer();stopSpeech()}renderPlayer('chapter');if(playing)startTimer()};$('#nextChapter').onclick=()=>chapter(1);$('#prevChapter').onclick=()=>chapter(-1);$('#speakBtn').onclick=()=>{narrating?stopSpeech():speak(p.chapters[pIdx].text)};$('#readToggle').onclick=()=>{state.readMode=!state.readMode;save();applyPrefs();toast(state.readMode?'Modo lectura activado':'Modo lectura desactivado')};$('#ambientVolume').oninput=e=>audio.setVolume(e.target.value);$('#audioInPlayer').onclick=()=>{audio.toggle();$('#audioInPlayer').textContent=audio.on?'Detener música':'Activar música'};$$('[data-chapter]').forEach(b=>b.onclick=()=>{pIdx=Number(b.dataset.chapter);seconds=0;stopSpeech();stopTimer();state.lastChapter=pIdx;save();playing=false;renderPlayer('chapter')})}
-function chapter(delta){stopSpeech();stopTimer();pIdx+=delta;if(pIdx>=p.chapters.length){playing=false;audio.stop();renderPlayer('finish');return}pIdx=Math.max(0,pIdx);state.lastProgram=p.id;state.lastChapter=pIdx;save();seconds=0;playing=false;renderPlayer('chapter')}
-function stopTimer(){if(ticker)clearInterval(ticker);ticker=null}function startTimer(){stopTimer();if(!playing)return;ticker=setInterval(()=>{seconds++;const ch=p?.chapters[pIdx];if(!ch){stopTimer();return}const b=$('#timeProgress');if(b)b.style.width=`${Math.min(100,seconds/ch.seconds*100)}%`;const t=$('.player-controls .row span');if(t)t.textContent=`En curso · ${format(seconds)} / ${format(ch.seconds)}`;if(seconds>=ch.seconds){stopTimer();playing=false;renderPlayer('chapter');toast('Capítulo completado. Avanza cuando quieras.') }},1000)}function format(x){let s=Math.max(0,Math.round(x));return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`}
+let current = 'home';
+let selectedTrack = 'all';
+let diaryTab = 'all';
+let session = null;
+let narrating = false;
+let speechToken = 0;
+const defaultProgram = D.programs[0];
+
+function stopSpeech() {
+  speechToken++;
+  narrating = false;
+  window.speechSynthesis?.cancel();
+}
+
+function speak(text) {
+  stopSpeech();
+  if (!('speechSynthesis' in window)) return toast('La lectura en voz alta no está disponible.');
+  const token = speechToken;
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = 'es-MX';
+  utterance.rate = .88;
+  utterance.onend = utterance.onerror = () => {
+    if (token === speechToken) narrating = false;
+  };
+  narrating = true;
+  speechSynthesis.speak(utterance);
+}
+
+function openDialog(title, html) {
+  $('#dialogTitle').textContent = title;
+  $('#dialogBody').innerHTML = html;
+  $('#dialog').hidden = false;
+  $('#closeDialog').focus();
+}
+
+function closeDialog() {
+  $('#dialog').hidden = true;
+  $('#dialogBody').innerHTML = '';
+}
+
+function setView(name) {
+  document.body.dataset.view = name;
+  const main = $('#view');
+  main.focus({preventScroll: true});
+  window.scrollTo({top: 0, behavior: 'instant'});
+}
+
+function nav(route) {
+  closeSession();
+  stopSpeech();
+  current = route;
+  state.route = route;
+  save();
+  $$('.nav-item').forEach(button => {
+    const isCurrent = button.dataset.route === route;
+    button.classList.toggle('active', isCurrent);
+    if (isCurrent) button.setAttribute('aria-current', 'page');
+    else button.removeAttribute('aria-current');
+  });
+  const views = {home: homeView, meditate: meditateView, route: careerView, journal: journalView, vision: visionView};
+  $('#view').innerHTML = views[route]();
+  setView(route);
+  bindView();
+}
+
+function resumePoint() {
+  const point = state.meditationResume;
+  const timeline = point && Object.hasOwn(AUDIO, point.id) ? AUDIO[point.id] : null;
+  return timeline && Number.isFinite(point.seconds) &&
+    point.seconds > 0 && point.seconds < timeline.duration - 1 ? point : null;
+}
+
+function durationLabel(program) {
+  return `${Math.max(1, Math.round(AUDIO[program.id].duration / 60))} min`;
+}
+
+function timeLabel(seconds) {
+  const whole = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(whole / 60)}:${String(whole % 60).padStart(2, '0')}`;
+}
+
+function atmosphere(className = '') {
+  return `<div class="meditation-atmosphere ${className}" aria-hidden="true">
+    <div class="meditation-rings"></div><div class="meditation-orb"></div>
+  </div>`;
+}
+
+function homeView() {
+  const resume = resumePoint();
+  const program = D.programs.find(item => item.id === resume?.id) || defaultProgram;
+  return `<section class="meditation-home">
+    ${atmosphere()}
+    <h1>Este momento es tuyo, Pam.</h1>
+    <p class="session-caption">${esc(program.title)} <span aria-hidden="true">·</span> ${durationLabel(program)}</p>
+    <div class="home-start">
+      <button class="btn primary play-button" data-action="open-last">${resume ? 'Continuar' : 'Iniciar'}</button>
+      ${resume ? '<button class="quiet-button" data-action="restart">Empezar de nuevo</button>' : ''}
+    </div>
+    <details class="home-more">
+      <summary>Más opciones</summary>
+      <div class="home-links">
+        <button class="quiet-button" data-route="meditate">Otras meditaciones</button>
+        <button class="quiet-button" data-route="journal">Diario</button>
+        <button class="quiet-button" data-route="route">Mi camino</button>
+        <button class="quiet-button" data-route="vision">Mi visión</button>
+      </div>
+    </details>
+  </section>`;
+}
+
+function meditateView() {
+  return `<section class="meditation-library">
+    <h1>Meditaciones</h1>
+    <div class="grid">${D.programs.map(program => `<article class="card program-card">
+      <div><h2>${esc(program.title)}</h2><p>${esc(program.subtitle)}</p></div>
+      <div class="row">
+        <span class="tag">${durationLabel(program)}</span>
+        <button class="btn primary" data-program="${program.id}" aria-label="Escuchar ${esc(program.title)}">Escuchar</button>
+      </div>
+    </article>`).join('')}</div>
+  </section>`;
+}
+
+function savePosition(entry, force = false) {
+  const position = entry.audio.currentTime;
+  if (!entry.positionReady || !Number.isFinite(position) || position < 1 ||
+      (entry.audio.ended && !force)) return;
+  if (!force && Math.abs(position - entry.savedAt) < 5) return;
+  entry.savedAt = position;
+  state.meditationResume = {id: entry.program.id, seconds: position};
+  state.lastProgram = entry.program.id;
+  state.lastChapter = entry.chapter;
+  save();
+}
+
+function closeSession() {
+  if (!session) return;
+  const entry = session;
+  session = null;
+  savePosition(entry, true);
+  entry.audio.pause();
+  entry.audio.removeAttribute('src');
+  entry.audio.load();
+}
+
+function refreshPlayback(entry, status = '') {
+  if (session !== entry) return;
+  const {audio, timeline} = entry;
+  const button = $('#togglePlayback');
+  const loading = status === 'Preparando audio…';
+  button.textContent = audio.paused ? 'Continuar' : 'Pausar';
+  button.disabled = loading && audio.paused;
+  $('#playerStatus').textContent = status;
+  const progress = $('#playerProgress');
+  progress.value = Math.min(audio.currentTime, timeline.duration);
+  $('#elapsed').textContent = timeLabel(audio.currentTime);
+  $('.meditation-atmosphere', $('#view')).classList.toggle('is-playing', !audio.paused && !loading);
+}
+
+function updateTranscript(entry) {
+  const reached = entry.timeline.chapters.filter(time => time <= entry.audio.currentTime).length;
+  const index = Math.max(0, reached - 1);
+  if (index === entry.chapter) return;
+  entry.chapter = index;
+  const chapter = entry.program.chapters[index];
+  $('#chapterTitle').textContent = chapter.title.replace(/^\d+\.\s*/, '');
+  $('#chapterText').textContent = chapter.text;
+}
+
+function playSession(entry) {
+  if (entry.audio.error) {
+    entry.seekTo = entry.positionReady ? entry.audio.currentTime : entry.seekTo;
+    entry.positionReady = entry.seekTo === 0;
+    entry.audio.load();
+  }
+  refreshPlayback(entry, 'Preparando audio…');
+  entry.audio.play().catch(error => {
+    if (session !== entry || error.name === 'AbortError') return;
+    refreshPlayback(entry, 'No se pudo reproducir. Puedes volver a intentarlo.');
+  });
+}
+
+function openProgram(id, position = 0) {
+  const program = D.programs.find(item => item.id === id);
+  if (!program) return;
+  closeSession();
+  stopSpeech();
+  const audio = new Audio();
+  audio.preload = 'auto';
+  const timeline = AUDIO[id];
+  const seekTo = Math.min(Math.max(position, 0), timeline.duration - 1);
+  const entry = {audio, program, timeline, chapter: -1, seekTo, positionReady: seekTo === 0, savedAt: seekTo};
+  session = entry;
+  $('#view').innerHTML = `<section class="meditation-player">
+    <div class="player-bar"><button id="exitPlayer" class="quiet-button">Salir</button></div>
+    ${atmosphere()}
+    <h1>${esc(program.title)}</h1>
+    <div class="session-progress">
+      <progress id="playerProgress" aria-label="Progreso de la sesión" max="${timeline.duration}" value="0"></progress>
+      <div class="progress-times"><span id="elapsed">0:00</span><span>${timeLabel(timeline.duration)}</span></div>
+    </div>
+    <button id="togglePlayback" class="btn primary play-button">Pausar</button>
+    <p id="playerStatus" class="player-status" role="status"></p>
+    <details class="session-transcript">
+      <summary>Leer la meditación</summary>
+      <h2 id="chapterTitle"></h2><p id="chapterText"></p>
+      <details class="full-transcript">
+        <summary>Ver el texto completo</summary>
+        ${program.chapters.map(chapter => `<h2>${esc(chapter.title)}</h2><p>${esc(chapter.text)}</p>`).join('')}
+      </details>
+    </details>
+  </section>`;
+  setView('player');
+  $('#exitPlayer').onclick = () => nav(current === 'meditate' ? 'meditate' : 'home');
+  $('#togglePlayback').onclick = () => audio.paused ? playSession(entry) : audio.pause();
+  audio.addEventListener('loadedmetadata', () => {
+    if (session !== entry) return;
+    if (!entry.positionReady) {
+      audio.currentTime = entry.seekTo;
+      entry.positionReady = true;
+    }
+    updateTranscript(entry);
+    refreshPlayback(entry, audio.paused ? '' : 'Preparando audio…');
+  });
+  audio.addEventListener('playing', () => refreshPlayback(entry));
+  audio.addEventListener('waiting', () => refreshPlayback(entry, 'Preparando audio…'));
+  audio.addEventListener('pause', () => {
+    if (session !== entry || audio.ended) return;
+    savePosition(entry, true);
+    refreshPlayback(entry);
+  });
+  audio.addEventListener('timeupdate', () => {
+    if (session !== entry) return;
+    updateTranscript(entry);
+    $('#playerProgress').value = audio.currentTime;
+    $('#elapsed').textContent = timeLabel(audio.currentTime);
+    savePosition(entry);
+  });
+  audio.addEventListener('error', () => refreshPlayback(entry, 'Audio no disponible. Revisa tu conexión o abre la lectura.'));
+  audio.addEventListener('ended', () => {
+    if (session !== entry) return;
+    session = null;
+    state.meditationResume = null;
+    if (!state.completed.includes(program.id)) state.completed.push(program.id);
+    state.sessions.unshift({id: uid(), date: today(), program: program.title});
+    save();
+    renderFinish(program);
+  });
+  updateTranscript(entry);
+  audio.src = `./assets/meditaciones/${program.id}.mp3`;
+  playSession(entry);
+}
+
+function renderFinish(program) {
+  $('#view').innerHTML = `<section class="meditation-home meditation-finish">
+    ${atmosphere()}
+    <h1>Gracias por darte este momento, Pam.</h1>
+    <button class="btn primary play-button" data-route="home">Volver al inicio</button>
+    <details class="session-transcript">
+      <summary>Guardar una reflexión</summary>
+      <p>${esc(program.question)}</p>
+      <label class="label" for="reflectionText">Tu reflexión</label>
+      <textarea id="reflectionText" class="field"></textarea>
+      <button id="saveReflection" class="btn soft">Guardar en mi diario</button>
+    </details>
+  </section>`;
+  setView('finish');
+  bindGeneric();
+  $('#saveReflection').onclick = () => {
+    const content = $('#reflectionText').value.trim();
+    if (!content) return toast('Escribe una reflexión para guardarla.');
+    state.journal.unshift({id: uid(), date: today(), category: 'Meditación', title: program.title, content});
+    save();
+    nav('home');
+    toast('Reflexión guardada.');
+  };
+}
+
+function persistSession() {
+  if (session) savePosition(session, true);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden) persistSession();
+});
+window.addEventListener('pagehide', persistSession);
+
 function careerView(){let done=state.firstWeek.filter(x=>x.done).length;return wrap('RUTA PROFESIONAL · DOS CAMINOS',`<h1>El sueño comienza ahora.</h1><p class="lead" style="margin:16px 0 24px">No pospongas las candidaturas a Fórmula 1 hasta sentirte lista. Paralelamente, busca oportunidades que te permitan crecer, practicar y ganar estabilidad.</p><div class="split"><article class="card"><div class="eyebrow">CAMINO A · FÓRMULA 1</div><h3>Postularte desde hoy</h3><p>Comunicación, eventos, partnerships, hospitality, relaciones corporativas y operaciones comerciales.</p></article><article class="card"><div class="eyebrow">CAMINO B · CRECIMIENTO</div><h3>Experiencias que suman</h3><p>Proyectos internacionales, marketing, cuentas, eventos y equipos en los que desarrollar capacidades transferibles.</p></article></div><div class="section-head"><div><div class="eyebrow">PRIMEROS PASOS</div><h2>Tu primera semana.</h2><p class="muted">${done} de 7 acciones · un punto de partida flexible.</p></div></div><div class="progress-rail" style="margin-bottom:15px"><i style="width:${done/7*100}%"></i></div><div class="list">${state.firstWeek.map((x,i)=>`<div class="task ${x.done?'done':''}"><input type="checkbox" id="task${i}" data-task="${i}" ${x.done?'checked':''}><label for="task${i}"><strong>${esc(x.day)}</strong> · ${esc(x.task)}</label></div>`).join('')}</div><div class="section-head"><div><div class="eyebrow">SEGUIMIENTO</div><h2>Candidaturas reales.</h2></div><button class="btn primary" id="addApplication">+ Añadir</button></div><div class="filter-tabs" id="trackFilter"><button data-track="all" class="${selectedTrack==='all'?'active':''}">Todas</button><button data-track="A" class="${selectedTrack==='A'?'active':''}">Fórmula 1</button><button data-track="B" class="${selectedTrack==='B'?'active':''}">Otras</button></div><div class="stack" id="applicationList">${applicationsHTML()}</div><div class="section-head"><div><div class="eyebrow">ENLACES DE PARTIDA</div><h2>Explora equipos.</h2></div></div><div class="card">${D.f1Portals.map(x=>`<div class="external"><span><strong>${esc(x.name)}</strong><br><small class="muted">${esc(x.areas)}</small></span><a href="${esc(x.url)}" target="_blank" rel="noopener noreferrer" aria-label="Abrir sitio de ${esc(x.name)}">Abrir ↗</a></div>`).join('')}</div><div class="info">Son enlaces de referencia, no vacantes verificadas en tiempo real. Registra candidaturas solamente cuando realmente las envíes.</div>`)}
 function applicationsHTML(){const rows=state.applications.filter(x=>selectedTrack==='all'||x.track===selectedTrack);return rows.length?rows.map(x=>`<article class="card"><div class="row start"><div><div class="eyebrow">${x.track==='A'?'CAMINO A · F1':'CAMINO B · CRECIMIENTO'}</div><h3 style="margin:6px 0">${esc(x.company)}</h3><div class="muted small">${esc(x.role)} · ${esc(x.status)}</div><div class="tiny muted">${esc(dateFmt(x.date))}</div></div><button class="linkbtn" data-delete-app="${esc(x.id)}">Eliminar</button></div>${x.url?`<a class="small" href="${esc(x.url)}" rel="noopener noreferrer" target="_blank">Ver oportunidad ↗</a>`:''}${x.note?`<p>${esc(x.note)}</p>`:''}</article>`).join(''):'<div class="card"><p>Aún no hay candidaturas registradas en este camino. Puedes añadir la primera cuando tengas una oportunidad concreta.</p></div>'}
 function applicationModal(){openDialog('Añadir oportunidad',`<form id="appForm"><div class="form-group"><label class="label">Camino</label><select class="field" name="track"><option value="A">A · Fórmula 1</option><option value="B">B · Crecimiento paralelo</option></select></div><div class="form-group"><label class="label">Empresa</label><input name="company" class="field" required maxlength="120" placeholder="Nombre de la organización"></div><div class="form-group"><label class="label">Puesto</label><input name="role" class="field" required maxlength="120" placeholder="Título de la vacante"></div><div class="form-group"><label class="label">Estado</label><select class="field" name="status"><option>Por investigar</option><option>Preparando candidatura</option><option>Enviada</option><option>Entrevista</option><option>Seguimiento</option><option>Respuesta recibida</option></select></div><div class="form-group"><label class="label">Enlace (opcional)</label><input name="url" type="url" class="field" placeholder="https://..."></div><div class="form-group"><label class="label">Notas (opcional)</label><textarea name="note" class="field" maxlength="2000" placeholder="Qué aprendí o cómo voy a prepararme"></textarea></div><div class="button-row"><button class="btn primary" type="submit">Guardar oportunidad</button></div></form>`);$('#appForm').onsubmit=e=>{e.preventDefault();const f=new FormData(e.target);state.applications.unshift({id:uid(),date:today(),track:f.get('track'),company:String(f.get('company')).trim(),role:String(f.get('role')).trim(),status:f.get('status'),url:String(f.get('url')).trim(),note:String(f.get('note')).trim()});save();closeDialog();nav('route');toast('Oportunidad registrada')}}
@@ -33,6 +309,17 @@ function backup(){const blob=new Blob([JSON.stringify({format:'pam-mi-vision',ve
 function importData(){openDialog('Restaurar respaldo',`<p>Se restaurará el contenido guardado en el archivo JSON y reemplazará las entradas actuales. Antes de importar, exporta un respaldo si quieres conservarlas.</p><div class="form-group"><label for="restoreFile" class="label">Archivo de Pam · Mi visión</label><input type="file" id="restoreFile" class="field" accept="application/json,.json"></div><div class="button-row"><button class="btn primary" id="restoreConfirm">Restaurar</button></div>`);$('#restoreConfirm').onclick=async()=>{const f=$('#restoreFile').files[0];if(!f)return toast('Elige un archivo');try{const d=JSON.parse(await f.text());if(d.format!=='pam-mi-vision'||d.version!==2||!d.state||!Array.isArray(d.state.journal)||!Array.isArray(d.state.applications)||!Array.isArray(d.state.firstWeek))throw Error('Formato incompatible');state={...clone(defaultState),...d.state};save();closeDialog();applyPrefs();nav('vision');toast('Respaldo restaurado')}catch(e){toast('Archivo inválido o de otra versión')}}}
 function bindGeneric(){ $$('[data-route]').forEach(b=>{b.onclick=()=>nav(b.dataset.route)});$$('[data-program]').forEach(b=>b.onclick=()=>openProgram(b.dataset.program));}
 function bindView(){bindGeneric();$$('[data-task]').forEach(b=>b.onchange=e=>{state.firstWeek[Number(b.dataset.task)].done=e.target.checked;save();nav('route')});$$('[data-track]').forEach(b=>b.onclick=()=>{selectedTrack=b.dataset.track;nav('route')});$$('[data-diary]').forEach(b=>b.onclick=()=>{diaryTab=b.dataset.diary;nav('journal')});$$('[data-delete-app]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar esta oportunidad?')){state.applications=state.applications.filter(x=>x.id!==b.dataset.deleteApp);save();nav('route')}});$$('[data-delete-journal]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar esta entrada del diario?')){state.journal=state.journal.filter(x=>x.id!==b.dataset.deleteJournal);save();nav('journal')}});$$('[data-delete-evidence]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar este logro?')){state.evidences=state.evidences.filter(x=>x.id!==b.dataset.deleteEvidence);save();nav('journal')}});
-if($('#addApplication'))$('#addApplication').onclick=applicationModal;if($('#addEvidence'))$('#addEvidence').onclick=evidenceModal;if($('#addJournal'))$('#addJournal').onclick=()=>{let content=$('#journalBody').value.trim();if(!content)return toast('Escribe primero una reflexión');state.journal.unshift({id:uid(),date:today(),title:$('#journalTitle').value.trim()||'Mi reflexión',category:$('#journalCat').value,content});save();nav('journal');toast('Entrada guardada')};if($('#saveVision'))$('#saveVision').onclick=()=>{state.vision=$('#visionText').value.trim();save();toast('Declaración guardada')};if($('#readVision'))$('#readVision').onclick=()=>narrating?stopSpeech():speak($('#visionText').value);if($('#saveWoop'))$('#saveWoop').onclick=()=>{for(let key of Object.keys(state.woop))state.woop[key]=$(`#woop-${key}`).value.trim();save();toast('Plan guardado')};if($('#backupData'))$('#backupData').onclick=backup;if($('#importData'))$('#importData').onclick=importData;if($('#open-last'))$('#open-last').onclick=()=>openProgram(state.lastProgram,state.lastChapter);$$('[data-action="open-last"]').forEach(b=>b.onclick=()=>openProgram(state.lastProgram,state.lastChapter))}
-$('#brand').onclick=()=>nav('home');$('#audioToggle').onclick=()=>audio.toggle();$('#fontToggle').onclick=()=>{const vals=[1,1.125,1.25,1.4];const i=vals.findIndex(x=>Math.abs(x-state.font)<.01);state.font=vals[(i+1)%vals.length];save();applyPrefs();toast(`Texto: ${Math.round(state.font*100)}%`)};$('#themeToggle').onclick=()=>{state.theme=state.theme==='dark'?'light':'dark';save();applyPrefs()};$('#closeDialog').onclick=closeDialog;$('#dialog').addEventListener('click',e=>{if(e.target===$('#dialog'))closeDialog()});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#dialog').hidden)closeDialog()});applyPrefs();nav(['home','meditate','route','journal','vision'].includes(state.route)?state.route:'home');if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
+if($('#addApplication'))$('#addApplication').onclick=applicationModal;if($('#addEvidence'))$('#addEvidence').onclick=evidenceModal;if($('#addJournal'))$('#addJournal').onclick=()=>{let content=$('#journalBody').value.trim();if(!content)return toast('Escribe primero una reflexión');state.journal.unshift({id:uid(),date:today(),title:$('#journalTitle').value.trim()||'Mi reflexión',category:$('#journalCat').value,content});save();nav('journal');toast('Entrada guardada')};if($('#saveVision'))$('#saveVision').onclick=()=>{state.vision=$('#visionText').value.trim();save();toast('Declaración guardada')};if($('#readVision'))$('#readVision').onclick=()=>narrating?stopSpeech():speak($('#visionText').value);if($('#saveWoop'))$('#saveWoop').onclick=()=>{for(let key of Object.keys(state.woop))state.woop[key]=$(`#woop-${key}`).value.trim();save();toast('Plan guardado')};if($('#backupData'))$('#backupData').onclick=backup;if($('#importData'))$('#importData').onclick=importData;const start = $('[data-action="open-last"]');
+if (start) start.onclick = () => {
+  const point = resumePoint();
+  openProgram(point?.id || defaultProgram.id, point?.seconds || 0);
+};
+const restart = $('[data-action="restart"]');
+if (restart) restart.onclick = () => {
+  const point = resumePoint();
+  state.meditationResume = null;
+  save();
+  openProgram(point?.id || defaultProgram.id);
+}}
+$('#brand').onclick=()=>nav('home');$('#fontToggle').onclick=()=>{const vals=[1,1.125,1.25,1.4];const i=vals.findIndex(x=>Math.abs(x-state.font)<.01);state.font=vals[(i+1)%vals.length];save();applyPrefs();toast(`Texto: ${Math.round(state.font*100)}%`)};$('#themeToggle').onclick=()=>{state.theme=state.theme==='dark'?'light':'dark';save();applyPrefs()};$('#closeDialog').onclick=closeDialog;$('#dialog').addEventListener('click',e=>{if(e.target===$('#dialog'))closeDialog()});window.addEventListener('keydown',e=>{if(e.key==='Escape'&&!$('#dialog').hidden)closeDialog()});applyPrefs();nav('home');if('serviceWorker'in navigator&&location.protocol.startsWith('http'))navigator.serviceWorker.register('./sw.js').catch(()=>{});
 })();
